@@ -26,7 +26,10 @@ TODO:
 
 ## Difference between markdown and rich text
 
-- Blockquote -> translated to preformatted
+| Markdown     | Prismic                    |
+|--------------|----------------------------|
+| Blockquote   | translated to preformatted |
+| hr           | nothing                    |
 
 ## Install
 

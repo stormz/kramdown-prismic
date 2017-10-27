@@ -234,4 +234,10 @@ class KramdownPrismicTest < Minitest::Test
     markdown = ""
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
+
+  def test_convert_hr
+    expected = []
+    markdown = "---"
+    assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
+  end
 end
