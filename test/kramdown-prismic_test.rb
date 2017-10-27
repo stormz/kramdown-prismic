@@ -200,4 +200,18 @@ class KramdownPrismicTest < Minitest::Test
     markdown = "- *This* is a list item\n- This is a second list item"
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
+
+  def test_convert_preformatted
+    expected = [
+      {
+        type: "preformatted",
+        content: {
+          text: "This is a pre block\n",
+          spans: []
+        }
+      }
+    ]
+    markdown = "    This is a pre block\n"
+    assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
+  end
 end

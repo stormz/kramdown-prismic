@@ -50,6 +50,16 @@ module Kramdown
         }
       end
 
+      def convert_codeblock(element)
+        {
+          type: 'preformatted',
+          content: {
+            text: element.value,
+            spans: []
+          }
+        }
+      end
+
       def extract_content(element, memo={text: '', spans: []})
         element.children.inject(memo) do |memo2, child|
           send("extract_span_#{child.type}", child, memo2)
