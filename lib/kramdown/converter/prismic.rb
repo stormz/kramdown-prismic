@@ -51,9 +51,9 @@ module Kramdown
       end
 
       def extract_content(element, memo={text: '', spans: []})
-        element.children.inject(memo) do |memo, child|
-          send("extract_span_#{child.type}", child, memo)
-          memo
+        element.children.inject(memo) do |memo2, child|
+          send("extract_span_#{child.type}", child, memo2)
+          memo2
         end
       end
 
