@@ -1,5 +1,3 @@
-require 'kramdown'
-
 require 'kramdown/converter/base'
 
 module Kramdown

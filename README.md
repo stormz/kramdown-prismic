@@ -13,6 +13,8 @@ Not yet available on rubygems
 ## Usage
 
 ```ruby
+require 'kramdown-prismic'
+
 Kramdown::Document.new(markdown).to_prismic
 ```
 

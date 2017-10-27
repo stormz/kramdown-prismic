@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative './kramdown-prismic'
+require 'kramdown-prismic'
 
 class KramdownPrismic < Minitest::Test
   def test_convert_heading
