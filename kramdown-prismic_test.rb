@@ -66,7 +66,7 @@ class KramdownPrismic < Minitest::Test
     markdown = "[This is a paragraph](https://prismic.io)"
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
-  
+
   def test_convert_paragraph_with_strong
     expected = [
       {
@@ -104,6 +104,80 @@ class KramdownPrismic < Minitest::Test
       }
     ]
     markdown = "**This** is a paragraph"
+    assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
+  end
+
+  def test_convert_paragraph_with_em
+    expected = [
+      {
+        type: "paragraph",
+        content: {
+          text: "This is a paragraph",
+          spans: [
+            {
+              type: "em",
+              start: 0,
+              end: 4
+            }
+          ]
+        }
+      }
+    ]
+    markdown = "*This* is a paragraph"
+    assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
+  end
+
+  def test_convert_list_o
+    expected = [
+      {
+        type: "o-list-item",
+        content: {
+          text: "This is a list item",
+          spans: [
+            {
+              type: "em",
+              start: 0,
+              end: 4
+            }
+          ]
+        }
+      },
+      {
+        type: "o-list-item",
+        content: {
+          text: "This is a second list item",
+          spans: []
+        }
+      }
+    ]
+    markdown = "1. *This* is a list item\n2. This is a second list item"
+    assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
+  end
+
+  def test_convert_list_u
+    expected = [
+      {
+        type: "list-item",
+        content: {
+          text: "This is a list item",
+          spans: [
+            {
+              type: "em",
+              start: 0,
+              end: 4
+            }
+          ]
+        }
+      },
+      {
+        type: "list-item",
+        content: {
+          text: "This is a second list item",
+          spans: []
+        }
+      }
+    ]
+    markdown = "- *This* is a list item\n- This is a second list item"
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 end
