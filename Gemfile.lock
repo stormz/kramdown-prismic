@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    kramdown (1.15.0)
+    minitest (5.10.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  kramdown (~> 1.14)
+  minitest (~> 5.0)
+
+BUNDLED WITH
+   1.14.6
