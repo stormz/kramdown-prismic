@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'kramdown-prismic'
 
-class KramdownPrismic < Minitest::Test
+class KramdownPrismicTest < Minitest::Test
   def test_convert_heading
     expected = [
       {
