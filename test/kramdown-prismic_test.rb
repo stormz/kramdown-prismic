@@ -214,4 +214,10 @@ class KramdownPrismicTest < Minitest::Test
     markdown = "    This is a pre block\n"
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
+
+  def test_convert_empty
+    expected = []
+    markdown = ""
+    assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
+  end
 end

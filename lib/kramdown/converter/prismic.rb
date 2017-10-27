@@ -15,6 +15,9 @@ module Kramdown
         send("convert_#{element.type}", element)
       end
 
+      def convert_blank(element)
+      end
+
       def convert_header(element)
         {
           type: "heading#{element.options[:level]}",
