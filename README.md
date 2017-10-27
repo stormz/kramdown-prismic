@@ -24,7 +24,11 @@ TODO:
 - [ ] Image
 - [ ] Embed
 
-## Installation
+## Difference between markdown and rich text
+
+- Blockquote -> translated to preformatted
+
+## Install
 
 Not yet available on rubygems
 

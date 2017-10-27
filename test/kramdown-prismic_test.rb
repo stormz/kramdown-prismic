@@ -215,6 +215,20 @@ class KramdownPrismicTest < Minitest::Test
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
+  def test_convert_blockquote
+    expected = [
+      {
+        type: "preformatted",
+        content: {
+          text: "This is a blockquote",
+          spans: []
+        }
+      }
+    ]
+    markdown = "> This is a blockquote\n"
+    assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
+  end
+
   def test_convert_empty
     expected = []
     markdown = ""
