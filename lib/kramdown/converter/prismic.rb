@@ -18,10 +18,7 @@ module Kramdown
       def convert_header(element)
         {
           type: "heading#{element.options[:level]}",
-          content: {
-            text: element.options[:raw_text],
-            spans: []
-          }
+          content: extract_content(element)
         }
       end
 

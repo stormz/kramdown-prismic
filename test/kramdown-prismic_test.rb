@@ -30,6 +30,26 @@ class KramdownPrismic < Minitest::Test
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
+  def test_convert_heading_with_spans
+    expected = [
+      {
+        type: "heading2",
+        content: {
+          text: "This is a document title",
+          spans: [
+            {
+              type: "em",
+              start: 0,
+              end: 4
+            }
+          ]
+        }
+      }
+    ]
+    markdown = "## *This* is a document title"
+    assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
+  end
+
   def test_convert_paragraph
     expected = [
       {
