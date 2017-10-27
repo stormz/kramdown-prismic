@@ -9,11 +9,11 @@ module Kramdown
         }.compact.flatten
       end
 
+      private
+
       def convert_element(element)
         send("convert_#{element.type}", element)
       end
-
-      private
 
       def convert_header(element)
         {
