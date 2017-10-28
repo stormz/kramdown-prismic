@@ -15,7 +15,7 @@ TODO:
 - [x] heading5
 - [x] heading6
 - [x] paragraph
-- [ ] preformatted
+- [x] preformatted
 - [x] strong
 - [x] em
 - [x] hyperlink
