@@ -26,10 +26,31 @@ TODO:
 
 ## Difference between markdown and rich text
 
-| Markdown     | Prismic                    |
-|--------------|----------------------------|
-| Blockquote   | translated to preformatted |
-| hr           | nothing                    |
+| Markdown         | Prismic                    |
+|------------------|----------------------------|
+| Blockquote       | translated to preformatted |
+| hr               | nothing                    |
+| img              | moved to to level          |
+| dl               |                            |
+| dt               |                            |
+| dl               |                            |
+| table            |                            |
+| thead            |                            |
+| tobdy            |                            |
+| tfoot            |                            |
+| tr               |                            |
+| td               |                            |
+| math             |                            |
+| footnote         |                            |
+| entity           |                            |
+| typographic_sym  |                            |
+| smart_quote      |                            |
+| abbreviation     |                            |
+| html_element     |                            |
+| xml_comment      |                            |
+| xml_pi           |                            |
+| comment          |                            |
+| raw              |                            |
 
 ## Install
 
