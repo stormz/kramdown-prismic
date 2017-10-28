@@ -4,12 +4,30 @@ module Kramdown
   module Converter
     class Prismic < Base
       def convert(root)
-        root.children.map { |child|
+        move_img_to_top_level(root).map { |child|
           convert_element(child)
         }.compact.flatten
       end
 
       private
+
+      def move_img_to_top_level(root)
+        root.children.map do |child|
+          imgs = find_imgs(child)
+          [child, imgs]
+        end.flatten.compact
+      end
+
+      def find_imgs(child)
+        child.children.map do |element|
+          if element.type == :img
+            child.children.slice!(child.children.find_index(element))
+            element
+          else
+            find_imgs(element)
+          end
+        end
+      end
 
       def convert_element(element)
         send("convert_#{element.type}", element)
@@ -71,6 +89,19 @@ module Kramdown
       end
 
       def convert_hr(element)
+      end
+
+      def convert_img(element)
+        {
+          type: 'image',
+          content: {
+            text: '',
+            spans: []
+          },
+          data: {
+            url: element.attr["src"]
+          }
+        }
       end
 
       def extract_content(element, memo={text: '', spans: []})
