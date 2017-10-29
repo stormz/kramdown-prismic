@@ -149,6 +149,10 @@ module Kramdown
         extract_content(element, memo)
       end
 
+      def extract_span_br(element, memo)
+        memo[:text] += "\n"
+      end
+
       def extract_span_entity(element, memo)
         memo[:text] += unicode_char(element.value.code_point)
       end
