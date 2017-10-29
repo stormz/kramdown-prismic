@@ -264,4 +264,17 @@ class KramdownPrismicTest < Minitest::Test
     markdown =  "![](/img.png)"
     assert_equal expected, Kramdown::Document.new(markdown).to_prismic
   end
+
+  def test_convert_entity
+    expected = [
+      {type: "paragraph",
+       content: {
+         text: "\u00a0",
+         spans: []
+       }
+      }
+    ]
+    markdown = "&nbsp;"
+    assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
+  end
 end

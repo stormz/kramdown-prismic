@@ -148,6 +148,14 @@ module Kramdown
       def extract_span_p(element, memo)
         extract_content(element, memo)
       end
+
+      def extract_span_entity(element, memo)
+        memo[:text] += unicode_char(element.value.code_point)
+      end
+
+      def unicode_char(codepoint)
+        Utils::Entities::Entity.new(codepoint, '').char
+      end
     end
   end
 end
