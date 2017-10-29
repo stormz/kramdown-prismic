@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kramdown-prismic (0.0.2)
+    kramdown-prismic (0.0.3)
       kramdown (~> 1.0)
 
 GEM

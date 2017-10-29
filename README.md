@@ -21,7 +21,7 @@ TODO:
 - [x] hyperlink
 - [x] o-list-item
 - [x] list-item
-- [ ] Image
+- [x] Image
 - [ ] Embed
 
 ## Difference between markdown and rich text
@@ -31,6 +31,7 @@ TODO:
 | Blockquote       | translated to preformatted |
 | hr               | nothing                    |
 | img              | moved to to level          |
+| br               |                            |
 | dl               |                            |
 | dt               |                            |
 | dl               |                            |
@@ -42,7 +43,7 @@ TODO:
 | td               |                            |
 | math             |                            |
 | footnote         |                            |
-| entity           |                            |
+| entity           | Transformed to unicode     |
 | typographic_sym  |                            |
 | smart_quote      |                            |
 | abbreviation     |                            |
