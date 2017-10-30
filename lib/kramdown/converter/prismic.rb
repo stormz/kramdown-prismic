@@ -206,12 +206,22 @@ module Kramdown
         memo[:text] += element.value
       end
 
-      def extract_span_entity(element, memo)
-        memo[:text] += unicode_char(element.value.code_point)
+      TYPOGRAPHIC_SYMS = {
+        mdash: [::Kramdown::Utils::Entities.entity('mdash')],
+        ndash: [::Kramdown::Utils::Entities.entity('ndash')],
+        hellip: [::Kramdown::Utils::Entities.entity('hellip')],
+        laquo_space: [::Kramdown::Utils::Entities.entity('laquo'), ::Kramdown::Utils::Entities.entity('nbsp')],
+        raquo_space: [::Kramdown::Utils::Entities.entity('nbsp'), ::Kramdown::Utils::Entities.entity('raquo')],
+        laquo: [::Kramdown::Utils::Entities.entity('laquo')],
+        raquo: [::Kramdown::Utils::Entities.entity('raquo')]
+      }
+      def extract_span_typographic_sym(element, memo)
+        value = TYPOGRAPHIC_SYMS[element.value].map {|e| e.char }.join('')
+        memo[:text] += value
       end
 
-      def unicode_char(codepoint)
-        Utils::Entities::Entity.new(codepoint, '').char
+      def extract_span_entity(element, memo)
+        memo[:text] += element.value.char
       end
     end
   end

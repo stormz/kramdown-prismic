@@ -44,7 +44,7 @@ TODO:
 | math             | not supported              |
 | footnote         | not supported              |
 | entity           | Transformed to unicode     |
-| typographic_sym  |                            |
+| typographic_sym  | Transformed to unicode     |
 | smart_quote      |                            |
 | abbreviation     | not supported              |
 | html_element     | not supported              |

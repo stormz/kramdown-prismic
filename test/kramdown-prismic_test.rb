@@ -370,15 +370,39 @@ class KramdownPrismicTest < Minitest::Test
 
   def test_convert_entity
     expected = [
-      {type: "paragraph",
-       content: {
-         text: "\u00a0",
-         spans: []
-       }
+      {
+        type: "paragraph",
+        content: {
+          text: "\u00a0",
+          spans: []
+        }
       }
     ]
     markdown = "&nbsp;"
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
+  end
+
+  [['mdash' , ' ---', ' —'],
+   ['ndash' , ' --', ' –'],
+   ['hellip' , ' ...', ' …'],
+   ['laquo' , ' <<', ' «'],
+   ['raquo' , '>>', '»'],
+   ['laquo_space' , ' << T', ' « T'],
+   ['raquo_space' , ' >>', ' »']
+  ].each do |symbol|
+    define_method "test_convert_typographic_symbols_#{symbol[0]}" do
+      expected = [
+        {
+          type: "paragraph",
+          content: {
+            text: "Hello#{symbol[2]}",
+            spans: []
+          }
+        }
+      ]
+      markdown = "Hello#{symbol[1]}"
+      assert_equal expected, Kramdown::Document.new(markdown, input: :kramdown).to_prismic
+    end
   end
 
   def test_convert_br
