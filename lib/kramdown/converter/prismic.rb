@@ -34,6 +34,7 @@ module Kramdown
         child.children = child.children.inject([]) do |memo, element|
           if element.type == :img
             elements << element
+            warning('images inside content will be moved to the top level and may be rendered differently') if child.children.size > 1
           elsif element.type == :ul
             warning('nested list moved to the top level')
             elements << element

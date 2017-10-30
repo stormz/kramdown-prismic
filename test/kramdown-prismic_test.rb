@@ -329,7 +329,9 @@ class KramdownPrismicTest < Minitest::Test
       }
     ]
     markdown =  "![alt text](/img.png)"
-    assert_equal expected, Kramdown::Document.new(markdown).to_prismic
+    doc = Kramdown::Document.new(markdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 0, doc.warnings.size
   end
 
   def test_convert_double_img
@@ -365,7 +367,9 @@ class KramdownPrismicTest < Minitest::Test
       }
     ]
     markdown =  "![](/img.png)![](/img2.png)"
-    assert_equal expected, Kramdown::Document.new(markdown).to_prismic
+    doc = Kramdown::Document.new(markdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 2, doc.warnings.size
   end
 
   def test_convert_entity
