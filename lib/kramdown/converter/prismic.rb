@@ -113,7 +113,8 @@ module Kramdown
             spans: []
           },
           data: {
-            url: element.attr["src"]
+            url: element.attr["src"],
+            alt: element.attr["alt"]
           }
         }
       end

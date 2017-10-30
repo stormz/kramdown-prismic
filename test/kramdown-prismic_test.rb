@@ -323,11 +323,12 @@ class KramdownPrismicTest < Minitest::Test
           spans: []
         },
         data: {
-          url: '/img.png'
+          url: '/img.png',
+          alt: 'alt text'
         }
       }
     ]
-    markdown =  "![](/img.png)"
+    markdown =  "![alt text](/img.png)"
     assert_equal expected, Kramdown::Document.new(markdown).to_prismic
   end
 
@@ -347,7 +348,8 @@ class KramdownPrismicTest < Minitest::Test
           spans: []
         },
         data: {
-          url: '/img.png'
+          url: '/img.png',
+          alt: ''
         }
       },
       {
@@ -357,7 +359,8 @@ class KramdownPrismicTest < Minitest::Test
           spans: []
         },
         data: {
-          url: '/img2.png'
+          url: '/img2.png',
+          alt: ''
         }
       }
     ]
