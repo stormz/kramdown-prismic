@@ -30,11 +30,12 @@ TODO:
 |------------------|----------------------------|
 | Blockquote       | translated to preformatted |
 | hr               | nothing                    |
-| img              | moved to to level          |
+| img              | moved to the top level     |
+| nested list      | moved to the top level     |
 | br               |                            |
 | dl               |                            |
 | dt               |                            |
-| dl               |                            |
+| dd               |                            |
 | table            |                            |
 | thead            |                            |
 | tobdy            |                            |

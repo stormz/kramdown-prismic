@@ -14,8 +14,8 @@ module Kramdown
       def cleanup_ast(root)
         remove_blanks(root)
         root.children.map do |child|
-          imgs = find_imgs(child)
-          [child, imgs]
+          elements = extract_non_nestable_elements(child)
+          [child, elements]
         end.flatten.compact
       end
 
@@ -29,13 +29,17 @@ module Kramdown
         end
       end
 
-      def find_imgs(child)
+      def extract_non_nestable_elements(child)
         child.children.map do |element|
           if element.type == :img
             child.children.slice!(child.children.find_index(element))
             element
+          elsif element.type == :ul
+            warning('nested list moved to the top level')
+            child.children.slice!(child.children.find_index(element))
+            [element, extract_non_nestable_elements(element)]
           else
-            find_imgs(element)
+            extract_non_nestable_elements(element)
           end
         end
       end

@@ -201,6 +201,59 @@ class KramdownPrismicTest < Minitest::Test
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
+  def test_convert_nested_ul
+    expected = [
+      {
+        type: "list-item",
+        content: {
+          text: "item1\n",
+          spans: []
+        }
+      },
+      {
+        type: "list-item",
+        content: {
+          text: "item2",
+          spans: []
+        }
+      }
+    ]
+    markdown = "- item1\n  - item2"
+    doc = Kramdown::Document.new(markdown, input: :markdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
+
+  def test_convert_nested_nested_ul
+    expected = [
+      {
+        type: "list-item",
+        content: {
+          text: "item1\n",
+          spans: []
+        }
+      },
+      {
+        type: "list-item",
+        content: {
+          text: "item2\n",
+          spans: []
+        }
+      },
+      {
+        type: "list-item",
+        content: {
+          text: "item3",
+          spans: []
+        }
+      }
+    ]
+    markdown = "- item1\n  - item2\n    - item3"
+    doc = Kramdown::Document.new(markdown, input: :markdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 2, doc.warnings.size
+  end
+
   def test_convert_preformatted
     expected = [
       {
@@ -244,8 +297,8 @@ class KramdownPrismicTest < Minitest::Test
        }
       }
     ]
-    html = "1. Test\n\n    test"
-    assert_equal expected, Kramdown::Document.new(html, input: :markdown).to_prismic
+    markdown = "1. Test\n\n    test"
+    assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
   def test_convert_hr
