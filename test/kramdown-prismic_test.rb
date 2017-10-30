@@ -405,6 +405,19 @@ class KramdownPrismicTest < Minitest::Test
     end
   end
 
+  def test_convert_smart_quote
+    expected = [
+      {type: "paragraph",
+       content: {
+         text: "Test\u2019",
+         spans: []
+       }
+      }
+    ]
+    markdown = "Test'"
+    assert_equal expected, Kramdown::Document.new(markdown, input: :kramdown).to_prismic
+  end
+
   def test_convert_br
     expected = [
       {type: "paragraph",

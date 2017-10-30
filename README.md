@@ -45,7 +45,7 @@ TODO:
 | footnote         | not supported              |
 | entity           | Transformed to unicode     |
 | typographic_sym  | Transformed to unicode     |
-| smart_quote      |                            |
+| smart_quote      | Transformed to unicode     |
 | abbreviation     | not supported              |
 | html_element     | not supported              |
 | xml_comment      | not supported              |

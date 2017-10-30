@@ -238,6 +238,10 @@ module Kramdown
       def extract_span_entity(element, memo)
         memo[:text] += element.value.char
       end
+
+      def extract_span_smart_quote(element, memo)
+        memo[:text] += ::Kramdown::Utils::Entities.entity(element.value.to_s).char
+      end
     end
   end
 end
