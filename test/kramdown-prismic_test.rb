@@ -404,15 +404,78 @@ class KramdownPrismicTest < Minitest::Test
 
   def test_convert_span_html
     expected = [
-      {type: "paragraph",
-       content: {
-         text: "",
-         spans: []
-       }
+      {
+        type: "paragraph",
+        content: {
+          text: "",
+          spans: []
+        }
       }
     ]
     html = "<br>"
     doc = Kramdown::Document.new(html, input: :markdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
+
+  def test_convert_table
+    expected = []
+    markdown = "| First cell|Second cell|Third cell|"
+    doc = Kramdown::Document.new(markdown, input: :kramdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
+
+  def test_convert_definition
+    expected = []
+    markdown = "kramdown\n: A Markdown-superset converter"
+    doc = Kramdown::Document.new(markdown, input: :kramdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
+
+  def test_convert_math
+    expected = []
+    markdown = "$$ 5 + 5 $$"
+    doc = Kramdown::Document.new(markdown, input: :kramdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
+
+  def test_convert_footnote
+    expected = [
+      {
+        type: "paragraph",
+        content: {
+          text: "test",
+          spans: []
+        }
+      }]
+    markdown = "test[^1]\n\n[^1]: test"
+    doc = Kramdown::Document.new(markdown, input: :kramdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
+
+  def test_convert_abbreviation
+    expected = [
+      {
+        type: "paragraph",
+        content: {
+          text: "HTML",
+          spans: []
+        }
+      }]
+    markdown = "HTML\n\n*[HTML]: test"
+    doc = Kramdown::Document.new(markdown, input: :kramdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
+
+  def test_convert_comment
+    expected = []
+    markdown = "{::comment}\nComment\n{:/comment}"
+    doc = Kramdown::Document.new(markdown, input: :kramdown)
     assert_equal expected, doc.to_prismic
     assert_equal 1, doc.warnings.size
   end

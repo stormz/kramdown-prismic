@@ -32,25 +32,25 @@ TODO:
 | hr               | nothing                    |
 | img              | moved to the top level     |
 | nested list      | moved to the top level     |
-| dl               |                            |
-| dt               |                            |
-| dd               |                            |
-| table            |                            |
-| thead            |                            |
-| tobdy            |                            |
-| tfoot            |                            |
-| tr               |                            |
-| td               |                            |
-| math             |                            |
-| footnote         |                            |
+| dl               | not supported              |
+| dt               | not supported              |
+| dd               | not supported              |
+| table            | not supported              |
+| thead            | not supported              |
+| tobdy            | not supported              |
+| tfoot            | not supported              |
+| tr               | not supported              |
+| td               | not supported              |
+| math             | not supported              |
+| footnote         | not supported              |
 | entity           | Transformed to unicode     |
 | typographic_sym  |                            |
 | smart_quote      |                            |
-| abbreviation     |                            |
+| abbreviation     | not supported              |
 | html_element     | not supported              |
 | xml_comment      |                            |
 | xml_pi           |                            |
-| comment          |                            |
+| comment          | not supported              |
 | raw              |                            |
 
 ## Install

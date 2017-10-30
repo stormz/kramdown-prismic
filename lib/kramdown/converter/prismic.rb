@@ -124,6 +124,26 @@ module Kramdown
         nil
       end
 
+      def convert_table(element)
+        warning('translating table is not supported')
+        nil
+      end
+
+      def convert_dl(element)
+        warning('translating dl is not supported')
+        nil
+      end
+
+      def convert_math(element)
+        warning('translating math is not supported')
+        nil
+      end
+
+      def convert_comment(element)
+        warning('translating comment is not supported')
+        nil
+      end
+
       def extract_content(element, memo={text: '', spans: []})
         element.children.inject(memo) do |memo2, child|
           send("extract_span_#{child.type}", child, memo2)
@@ -175,6 +195,15 @@ module Kramdown
 
       def extract_span_html_element(element, memo)
         warning('translating html elements is not supported')
+      end
+
+      def extract_span_footnote(element, memo)
+        warning('translating footnote is not supported')
+      end
+
+      def extract_span_abbreviation(element, memo)
+        warning('translating abbreviation is not supported')
+        memo[:text] += element.value
       end
 
       def extract_span_entity(element, memo)
