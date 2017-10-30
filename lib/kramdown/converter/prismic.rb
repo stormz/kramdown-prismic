@@ -14,33 +14,35 @@ module Kramdown
       def cleanup_ast(root)
         remove_blanks(root)
         root.children.map do |child|
-          elements = extract_non_nestable_elements(child)
+          elements = []
+          extract_non_nestable_elements(child, elements)
           [child, elements]
         end.flatten.compact
       end
 
       def remove_blanks(root)
-        root.children.each do |child|
-          if child.type == :blank
-            root.children.slice!(root.children.find_index(child))
-          else
+        root.children = root.children.inject([]) do |memo, child|
+          unless child.type == :blank
             remove_blanks(child)
+            memo << child
           end
+          memo
         end
       end
 
-      def extract_non_nestable_elements(child)
-        child.children.map do |element|
+      def extract_non_nestable_elements(child, elements)
+        child.children = child.children.inject([]) do |memo, element|
           if element.type == :img
-            child.children.slice!(child.children.find_index(element))
-            element
+            elements << element
           elsif element.type == :ul
             warning('nested list moved to the top level')
-            child.children.slice!(child.children.find_index(element))
-            [element, extract_non_nestable_elements(element)]
+            elements << element
+            extract_non_nestable_elements(element, elements)
           else
-            extract_non_nestable_elements(element)
+            memo << element
+            extract_non_nestable_elements(element, elements)
           end
+          memo
         end
       end
 

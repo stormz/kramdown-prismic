@@ -297,7 +297,7 @@ class KramdownPrismicTest < Minitest::Test
        }
       }
     ]
-    markdown = "1. Test\n\n    test"
+    markdown = "\n1. Test\n\n    test\n"
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
@@ -328,6 +328,40 @@ class KramdownPrismicTest < Minitest::Test
       }
     ]
     markdown =  "![](/img.png)"
+    assert_equal expected, Kramdown::Document.new(markdown).to_prismic
+  end
+
+  def test_convert_double_img
+    expected = [
+      {
+        type: "paragraph",
+        content: {
+          text: "",
+          spans: []
+        }
+      },
+      {
+        type: "image",
+        content: {
+          text: "",
+          spans: []
+        },
+        data: {
+          url: '/img.png'
+        }
+      },
+      {
+        type: "image",
+        content: {
+          text: "",
+          spans: []
+        },
+        data: {
+          url: '/img2.png'
+        }
+      }
+    ]
+    markdown =  "![](/img.png)![](/img2.png)"
     assert_equal expected, Kramdown::Document.new(markdown).to_prismic
   end
 
