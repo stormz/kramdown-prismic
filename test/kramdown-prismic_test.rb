@@ -519,4 +519,12 @@ class KramdownPrismicTest < Minitest::Test
     assert_equal expected, doc.to_prismic
     assert_equal 1, doc.warnings.size
   end
+
+  def test_convert_raw
+    expected = []
+    markdown = "{::nomarkdown}\nComment\n{:/nomarkdown}"
+    doc = Kramdown::Document.new(markdown, input: :kramdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
 end

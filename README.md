@@ -51,7 +51,7 @@ TODO:
 | xml_comment      | not supported              |
 | xml_pi           | not supported              |
 | comment          | not supported              |
-| raw              |                            |
+| raw              | not supported              |
 
 ## Install
 
