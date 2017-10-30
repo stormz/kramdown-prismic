@@ -32,7 +32,6 @@ TODO:
 | hr               | nothing                    |
 | img              | moved to the top level     |
 | nested list      | moved to the top level     |
-| br               |                            |
 | dl               |                            |
 | dt               |                            |
 | dd               |                            |
