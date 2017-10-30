@@ -235,6 +235,19 @@ class KramdownPrismicTest < Minitest::Test
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
+  def test_convert_span_blank
+    expected = [
+      {type: "o-list-item",
+       content: {
+         text: "Testtest",
+         spans: []
+       }
+      }
+    ]
+    html = "1. Test\n\n    test"
+    assert_equal expected, Kramdown::Document.new(html, input: :markdown).to_prismic
+  end
+
   def test_convert_hr
     expected = []
     markdown = "---"

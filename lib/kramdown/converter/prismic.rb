@@ -4,18 +4,29 @@ module Kramdown
   module Converter
     class Prismic < Base
       def convert(root)
-        move_img_to_top_level(root).map { |child|
+        cleanup_ast(root).map { |child|
           convert_element(child)
         }.compact.flatten
       end
 
       private
 
-      def move_img_to_top_level(root)
+      def cleanup_ast(root)
+        remove_blanks(root)
         root.children.map do |child|
           imgs = find_imgs(child)
           [child, imgs]
         end.flatten.compact
+      end
+
+      def remove_blanks(root)
+        root.children.each do |child|
+          if child.type == :blank
+            root.children.slice!(root.children.find_index(child))
+          else
+            remove_blanks(child)
+          end
+        end
       end
 
       def find_imgs(child)
@@ -31,9 +42,6 @@ module Kramdown
 
       def convert_element(element)
         send("convert_#{element.type}", element)
-      end
-
-      def convert_blank(element)
       end
 
       def convert_header(element)
