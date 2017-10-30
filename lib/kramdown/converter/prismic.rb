@@ -144,6 +144,16 @@ module Kramdown
         nil
       end
 
+      def convert_xml_comment(element)
+        warning('translating xml_comment is not supported')
+        nil
+      end
+
+      def convert_xml_pi(element)
+        warning('translating xml_pi is not supported')
+        nil
+      end
+
       def extract_content(element, memo={text: '', spans: []})
         element.children.inject(memo) do |memo2, child|
           send("extract_span_#{child.type}", child, memo2)

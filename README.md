@@ -48,8 +48,8 @@ TODO:
 | smart_quote      |                            |
 | abbreviation     | not supported              |
 | html_element     | not supported              |
-| xml_comment      |                            |
-| xml_pi           |                            |
+| xml_comment      | not supported              |
+| xml_pi           | not supported              |
 | comment          | not supported              |
 | raw              |                            |
 
