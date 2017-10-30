@@ -116,6 +116,11 @@ module Kramdown
         }
       end
 
+      def convert_html_element(element)
+        warning('translating html elements is not supported')
+        nil
+      end
+
       def extract_content(element, memo={text: '', spans: []})
         element.children.inject(memo) do |memo2, child|
           send("extract_span_#{child.type}", child, memo2)
