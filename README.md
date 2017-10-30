@@ -47,7 +47,7 @@ TODO:
 | typographic_sym  |                            |
 | smart_quote      |                            |
 | abbreviation     |                            |
-| html_element     |                            |
+| html_element     | not supported              |
 | xml_comment      |                            |
 | xml_pi           |                            |
 | comment          |                            |

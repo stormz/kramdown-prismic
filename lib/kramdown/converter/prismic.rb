@@ -161,6 +161,10 @@ module Kramdown
         memo[:text] += "\n"
       end
 
+      def extract_span_html_element(element, memo)
+        warning('translating html elements is not supported')
+      end
+
       def extract_span_entity(element, memo)
         memo[:text] += unicode_char(element.value.code_point)
       end
