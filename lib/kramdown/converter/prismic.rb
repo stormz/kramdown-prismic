@@ -114,7 +114,9 @@ module Kramdown
             spans: []
           },
           data: {
-            url: element.attr["src"],
+            origin: {
+              url: element.attr["src"]
+            },
             alt: element.attr["alt"]
           }
         }

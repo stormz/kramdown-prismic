@@ -323,7 +323,9 @@ class KramdownPrismicTest < Minitest::Test
           spans: []
         },
         data: {
-          url: '/img.png',
+          origin: {
+            url: '/img.png'
+          },
           alt: 'alt text'
         }
       }
@@ -350,7 +352,9 @@ class KramdownPrismicTest < Minitest::Test
           spans: []
         },
         data: {
-          url: '/img.png',
+          origin: {
+            url: '/img.png'
+          },
           alt: ''
         }
       },
@@ -361,7 +365,9 @@ class KramdownPrismicTest < Minitest::Test
           spans: []
         },
         data: {
-          url: '/img2.png',
+          origin: {
+            url: '/img2.png'
+          },
           alt: ''
         }
       }
