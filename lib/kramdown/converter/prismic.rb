@@ -59,6 +59,7 @@ module Kramdown
       end
 
       def convert_p(element)
+        return nil if element.children.size == 0
         {
           type: "paragraph",
           content: extract_content(element)

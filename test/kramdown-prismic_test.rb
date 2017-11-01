@@ -310,13 +310,6 @@ class KramdownPrismicTest < Minitest::Test
   def test_convert_img
     expected = [
       {
-        type: "paragraph",
-        content: {
-          text: "",
-          spans: []
-        }
-      },
-      {
         type: "image",
         content: {
           text: "",
@@ -338,13 +331,6 @@ class KramdownPrismicTest < Minitest::Test
 
   def test_convert_double_img
     expected = [
-      {
-        type: "paragraph",
-        content: {
-          text: "",
-          spans: []
-        }
-      },
       {
         type: "image",
         content: {
