@@ -1,6 +1,6 @@
 # Kramdown Prismic
 
-A Kramdown converter to convert documents into prismic rich text format.
+A [Kramdown][] converter to convert documents into [prismic][] rich text format.
 
 ## Status
 
@@ -52,3 +52,6 @@ Kramdown::Document.new(markdown).to_prismic
 ## License
 
 MIT
+
+[Kramdown]: https://kramdown.gettalong.org/
+[prismic]: https://prismic.io/
