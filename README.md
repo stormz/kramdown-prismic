@@ -2,15 +2,65 @@
 
 A [Kramdown][] converter to convert documents into [prismic][] rich text format.
 
-## Status
+Thanks to kramdown, you can convert HTML, Kramdown and markdown documents to the prismic format.
 
-Most of the content is translated. See the table below to see the difference:
+## Install
+
+```ruby
+gem 'kramdown-prismic', '~> 0.1'
+```
+
+## Usage
+
+### Convert kramdown documents to Prismic
+
+```ruby
+require 'kramdown-prismic'
+
+kramdown = '# Hello world'
+Kramdown::Document.new(kramdown).to_prismic
+```
+
+### Convert markdown documents to Prismic
+
+```ruby
+require 'kramdown-prismic'
+
+markdown = '# Hello world'
+Kramdown::Document.new(markdown, input: :markdown).to_prismic
+```
+
+### Convert HTML documents to Prismic
+
+```ruby
+require 'kramdown-prismic'
+
+html = '<h1>Hello world</h1>'
+Kramdown::Document.new(html, input: :html).to_prismic
+```
+
+### Lookup for warnings
+
+If there is some elements that cannot be converted (see the status table), a warning will be emitted.
+
+For instance, html elements in the markdown is not supported:
+
+```ruby
+require 'kramdown-prismic'
+
+markdown = '<h1>Hello world</h1>'
+result = Kramdown::Document.new(markdown, input: :markdown)
+result.to_prismic
+p result.warnings
+```
 
 ### Difference between markdown and rich text
 
+Some elements cannot be converted, due to some Prismic limitations. The table below explain the difference and limitations of the current converter:
+
 | Markdown         | Prismic                    |
 |------------------|----------------------------|
-| Blockquote       | translated to preformatted |
+| blockquote       | converted to preformatted  |
 | hr               | nothing                    |
 | img              | moved to the top level     |
 | nested list      | moved to the top level     |
@@ -25,29 +75,15 @@ Most of the content is translated. See the table below to see the difference:
 | td               | not supported              |
 | math             | not supported              |
 | footnote         | not supported              |
-| entity           | Transformed to unicode     |
-| typographic_sym  | Transformed to unicode     |
-| smart_quote      | Transformed to unicode     |
+| entity           | converted to unicode     |
+| typographic_sym  | converted to unicode     |
+| smart_quote      | converted to unicode     |
 | abbreviation     | not supported              |
 | html_element     | not supported              |
 | xml_comment      | not supported              |
 | xml_pi           | not supported              |
 | comment          | not supported              |
 | raw              | not supported              |
-
-## Install
-
-```ruby
-gem 'kramdown-prismic', '~> 0.1'
-```
-
-## Usage
-
-```ruby
-require 'kramdown-prismic'
-
-Kramdown::Document.new(markdown).to_prismic
-```
 
 ## License
 
