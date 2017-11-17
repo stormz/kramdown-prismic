@@ -146,4 +146,40 @@ class KramdownPrismicParserTest < Minitest::Test
     doc = Kramdown::Document.new(prismic, input: :prismic)
     assert_equal expected, doc.to_kramdown
   end
+
+  def test_parse_image
+    prismic = [
+      {
+        type: "image",
+        content: {
+          text: "",
+          spans: []
+        },
+        data: {
+          origin: {
+            url: '/img.png'
+          },
+          alt: 'alt text'
+        }
+      }
+    ]
+    expected = "![alt text](/img.png)\n\n"
+    doc = Kramdown::Document.new(prismic, input: :prismic)
+    assert_equal expected, doc.to_kramdown
+  end
+
+  def test_parse_preformatted
+    prismic = [
+      {
+        type: "preformatted",
+        content: {
+          text: "This is a pre block\n",
+          spans: []
+        }
+      }
+    ]
+    expected = "> This is a pre block \n\n"
+    doc = Kramdown::Document.new(prismic, input: :prismic)
+    assert_equal expected, doc.to_kramdown
+  end
 end

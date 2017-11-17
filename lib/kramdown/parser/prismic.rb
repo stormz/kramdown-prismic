@@ -25,6 +25,17 @@ module Kramdown
         Kramdown::Element.new(:p)
       end
 
+      def parse_image(block)
+        p = Kramdown::Element.new(:p)
+        img = Kramdown::Element.new(:img, nil, {"src" => block[:data][:origin][:url], "alt" => block[:data][:alt]})
+        p.children << img
+        p
+      end
+
+      def parse_preformatted(block)
+        Kramdown::Element.new(:blockquote)
+      end
+
       def parse_spans(element, block)
         stack = []
 
