@@ -1,8 +1,14 @@
 # Kramdown Prismic
 
-A [Kramdown][] converter to convert documents into [prismic][] rich text format.
+A [Kramdown][] parser and converter to convert documents into [prismic][] rich text format and back.
 
-Thanks to kramdown, you can convert HTML, Kramdown and markdown documents to the prismic format.
+A useful usage is to convert markdown documents to prismic for import purpose. Then you can even convert prismic format back to markdown.
+
+## Status
+
+The converter part (kramdown to prismic) is working and fairly complete. See *Difference between markdown and rich text* below to know more about limitations.
+
+The parser part is quite new and not feature complete (missing list item for instance).
 
 ## Install
 
@@ -37,6 +43,22 @@ require 'kramdown-prismic'
 
 html = '<h1>Hello world</h1>'
 Kramdown::Document.new(html, input: :html).to_prismic
+```
+
+### Convert Primic to markdown
+
+```ruby
+require 'kramdown-prismic'
+prismic = [
+  {
+    type: "heading1",
+    content: {
+      text: "This is the document title",
+      spans: []
+    }
+  }
+]
+Kramdown::Document.new(prismic, input: :prismic).to_kramdown
 ```
 
 ### Lookup for warnings
