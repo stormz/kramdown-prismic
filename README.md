@@ -45,7 +45,7 @@ html = '<h1>Hello world</h1>'
 Kramdown::Document.new(html, input: :html).to_prismic
 ```
 
-### Convert Primic to markdown
+### Convert Prismic to markdown
 
 ```ruby
 require 'kramdown-prismic'
