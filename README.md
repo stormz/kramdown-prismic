@@ -86,6 +86,9 @@ Some elements cannot be converted, due to some Prismic limitations. The table be
 | hr               | nothing                    |
 | img              | moved to the top level     |
 | nested list      | moved to the top level     |
+| entity           | converted to unicode       |
+| typographic_sym  | converted to unicode       |
+| smart_quote      | converted to unicode       |
 | dl               | not supported              |
 | dt               | not supported              |
 | dd               | not supported              |
@@ -97,9 +100,6 @@ Some elements cannot be converted, due to some Prismic limitations. The table be
 | td               | not supported              |
 | math             | not supported              |
 | footnote         | not supported              |
-| entity           | converted to unicode     |
-| typographic_sym  | converted to unicode     |
-| smart_quote      | converted to unicode     |
 | abbreviation     | not supported              |
 | html_element     | not supported              |
 | xml_comment      | not supported              |
