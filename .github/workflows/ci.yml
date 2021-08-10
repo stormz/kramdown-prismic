@@ -7,7 +7,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        ruby: [2.5, 2.6, 2.7]
+        ruby: [2.6, 2.7]
         gemfile: [ kramdown1, kramdown2 ]
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/${{ matrix.gemfile }}.gemfile
