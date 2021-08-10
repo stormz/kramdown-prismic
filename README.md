@@ -1,6 +1,6 @@
 # Kramdown Prismic
 
-A [Kramdown][] parser and converter to convert documents into [prismic][] rich text format and back.
+A [Kramdown][] parser and converter to convert documents into [prismic][] rich text format and the other way around.
 
 A useful usage is to convert markdown documents to prismic for import purpose. Then you can even convert prismic format back to markdown.
 
