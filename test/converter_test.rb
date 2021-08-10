@@ -1,32 +1,35 @@
+# coding: utf-8
 require 'minitest/autorun'
 require 'kramdown-prismic'
 
 class KramdownPrismicConverterTest < Minitest::Test
-  def test_convert_heading
-    expected = [
-      {
-        type: "heading1",
-        content: {
-          text: "This is the document title",
-          spans: []
+  6.times do |heading|
+    define_method "test_convert_heading_#{heading}" do
+      expected = [
+        {
+          type: "heading#{heading + 1}",
+          content: {
+            text: "This is the document title",
+            spans: []
+          }
         }
-      }
-    ]
-    markdown = "# This is the document title"
-    assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
+      ]
+      markdown = "#{"#" * (heading + 1)} This is the document title"
+      assert_equal expected, Kramdown::Document.new(markdown, input: :kramdown).to_prismic
+    end
   end
 
-  def test_convert_heading2
+  def test_convert_heading7
     expected = [
       {
-        type: "heading2",
+        type: "heading6",
         content: {
-          text: "This is a document title",
+          text: "# This is the document title",
           spans: []
         }
       }
     ]
-    markdown = "## This is a document title"
+    markdown = "####### This is the document title"
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
