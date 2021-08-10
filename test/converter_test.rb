@@ -532,22 +532,6 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal 1, doc.warnings.size
   end
 
-  def test_convert_xml_comment
-    expected = []
-    markdown = "<!-- a *comment* -->"
-    doc = Kramdown::Document.new(markdown, input: :kramdown)
-    assert_equal expected, doc.to_prismic
-    assert_equal 1, doc.warnings.size
-  end
-
-  def test_convert_xml_pi
-    expected = []
-    markdown = "<? a processing `instruction`?>"
-    doc = Kramdown::Document.new(markdown, input: :kramdown)
-    assert_equal expected, doc.to_prismic
-    assert_equal 1, doc.warnings.size
-  end
-
   def test_convert_raw
     expected = []
     markdown = "{::nomarkdown}\nComment\n{:/nomarkdown}"
