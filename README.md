@@ -2,7 +2,7 @@
 
 A [Kramdown][] parser and converter to convert documents into [prismic][] rich text format and the other way around.
 
-A useful usage is to convert markdown documents to prismic for import purpose. Then you can even convert prismic format back to markdown.
+A useful usage is to convert markdown documents to prismic for [import purpose][prismic-import]. Then you can even convert prismic format back to markdown.
 
 ## Status
 
@@ -123,3 +123,4 @@ MIT
 
 [Kramdown]: https://kramdown.gettalong.org/
 [prismic]: https://prismic.io/
+[prismic-import]: https://prismic.io/docs/core-concepts/how-to-import-content
