@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/stormz/kramdown-prismic'
   s.license     = 'MIT'
 
-  s.add_dependency "kramdown", "~> 1.0"
+  s.add_dependency "kramdown", "~> 2.0"
   s.add_development_dependency "minitest", "~> 5.0"
   s.add_development_dependency "rake", "~> 12.0"
 end
