@@ -107,6 +107,16 @@ Some elements cannot be converted, due to some Prismic limitations. The table be
 | comment          | not supported              |
 | raw              | not supported              |
 
+## Develop
+
+Install dependencies:
+
+    bundle install
+
+Run tests:
+
+    bundle exec rake test
+
 ## License
 
 MIT
