@@ -182,4 +182,23 @@ class KramdownPrismicParserTest < Minitest::Test
     doc = Kramdown::Document.new(prismic, input: :prismic)
     assert_equal expected, doc.to_kramdown
   end
+
+  def test_parse_embed
+    prismic = [
+      {
+        type: "embed",
+        data: {
+          type: "video",
+          embed_url: "https://www.youtube.com/watch?v=y6y_4_b6RS8"
+        },
+        content: {
+          text: "",
+          spans: []
+        }
+      }
+    ]
+    expected = "<iframe src=\"https://www.youtube.com/watch?v=y6y_4_b6RS8\"></iframe>\n"
+    doc = Kramdown::Document.new(prismic, input: :prismic)
+    assert_equal expected, doc.to_kramdown
+  end
 end

@@ -36,6 +36,10 @@ module Kramdown
         Kramdown::Element.new(:blockquote)
       end
 
+      def parse_embed(block)
+        Kramdown::Element.new(:html_element, 'iframe', { src: block[:data][:embed_url] })
+      end
+
       def parse_spans(element, block)
         stack = []
 
