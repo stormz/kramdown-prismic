@@ -8,6 +8,9 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         ruby: [2.5, 2.6, 2.7]
+        gemfile: [ kramdown1, kramdown2 ]
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/${{ matrix.gemfile }}.gemfile
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
