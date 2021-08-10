@@ -18,6 +18,22 @@ gem 'kramdown-prismic', '~> 0.1'
 
 ## Usage
 
+### With executables
+
+*markdown2prismic*:
+
+    markdown2prismic $'# My Title\n\nHello world'
+
+*html2prismic*:
+
+    html2prismic '<h1>My Title</h1><p>Hello world</p>'
+
+*prismic2markdown*:
+
+    prismic2markdown '[{"type":"heading1","content":{"text":"My Title","spans":[]}},{"type":"paragraph","content":{"text":"Test","spans":[]}}]'
+
+### As a library
+
 **Convert kramdown documents to Prismic**
 
 ```ruby
