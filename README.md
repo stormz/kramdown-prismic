@@ -18,7 +18,7 @@ gem 'kramdown-prismic', '~> 0.1'
 
 ## Usage
 
-### Convert kramdown documents to Prismic
+**Convert kramdown documents to Prismic**
 
 ```ruby
 require 'kramdown-prismic'
@@ -27,7 +27,7 @@ kramdown = '# Hello world'
 Kramdown::Document.new(kramdown).to_prismic
 ```
 
-### Convert markdown documents to Prismic
+**Convert markdown documents to Prismic**
 
 ```ruby
 require 'kramdown-prismic'
@@ -36,7 +36,7 @@ markdown = '# Hello world'
 Kramdown::Document.new(markdown, input: :markdown).to_prismic
 ```
 
-### Convert HTML documents to Prismic
+**Convert HTML documents to Prismic**
 
 ```ruby
 require 'kramdown-prismic'
@@ -45,7 +45,7 @@ html = '<h1>Hello world</h1>'
 Kramdown::Document.new(html, input: :html).to_prismic
 ```
 
-### Convert Prismic to markdown
+**Convert Prismic to markdown**
 
 ```ruby
 require 'kramdown-prismic'
