@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.2.2
+
+- Convert links with only an image inside. See #1.
+
 ## Version 0.2.1
 
 - Parse embed elements
