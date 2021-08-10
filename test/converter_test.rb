@@ -462,11 +462,13 @@ class KramdownPrismicConverterTest < Minitest::Test
 
   def test_convert_br
     expected = [
-      { type: 'paragraph',
+      {
+        type: 'paragraph',
         content: {
           text: "Test\n",
           spans: []
-        } }
+        }
+      }
     ]
     html = '<p>Test<br></p>'
     assert_equal expected, Kramdown::Document.new(html, input: :html).to_prismic
