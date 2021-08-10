@@ -1,4 +1,5 @@
-# coding: utf-8
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require 'kramdown-prismic'
 
@@ -9,12 +10,12 @@ class KramdownPrismicConverterTest < Minitest::Test
         {
           type: "heading#{heading + 1}",
           content: {
-            text: "This is the document title",
+            text: 'This is the document title',
             spans: []
           }
         }
       ]
-      markdown = "#{"#" * (heading + 1)} This is the document title"
+      markdown = "#{'#' * (heading + 1)} This is the document title"
       assert_equal expected, Kramdown::Document.new(markdown, input: :kramdown).to_prismic
     end
   end
@@ -22,26 +23,26 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_heading7
     expected = [
       {
-        type: "heading6",
+        type: 'heading6',
         content: {
-          text: "# This is the document title",
+          text: '# This is the document title',
           spans: []
         }
       }
     ]
-    markdown = "####### This is the document title"
+    markdown = '####### This is the document title'
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
   def test_convert_heading_with_spans
     expected = [
       {
-        type: "heading2",
+        type: 'heading2',
         content: {
-          text: "This is a document title",
+          text: 'This is a document title',
           spans: [
             {
-              type: "em",
+              type: 'em',
               start: 0,
               end: 4
             }
@@ -49,56 +50,56 @@ class KramdownPrismicConverterTest < Minitest::Test
         }
       }
     ]
-    markdown = "## *This* is a document title"
+    markdown = '## *This* is a document title'
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
   def test_convert_paragraph
     expected = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "This is a paragraph",
+          text: 'This is a paragraph',
           spans: []
         }
       }
     ]
-    markdown = "This is a paragraph"
+    markdown = 'This is a paragraph'
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
   def test_convert_paragraph_with_spans
     expected = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "This is a paragraph",
+          text: 'This is a paragraph',
           spans: [
             {
-              type: "hyperlink",
+              type: 'hyperlink',
               start: 0,
               end: 19,
               data: {
-                url: "https://prismic.io"
+                url: 'https://prismic.io'
               }
             }
           ]
         }
       }
     ]
-    markdown = "[This is a paragraph](https://prismic.io)"
+    markdown = '[This is a paragraph](https://prismic.io)'
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
   def test_convert_paragraph_with_strong
     expected = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "This is a paragraph",
+          text: 'This is a paragraph',
           spans: [
             {
-              type: "strong",
+              type: 'strong',
               start: 0,
               end: 19
             }
@@ -106,19 +107,19 @@ class KramdownPrismicConverterTest < Minitest::Test
         }
       }
     ]
-    markdown = "**This is a paragraph**"
+    markdown = '**This is a paragraph**'
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
   def test_convert_paragraph_with_strong2
     expected = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "This is a paragraph",
+          text: 'This is a paragraph',
           spans: [
             {
-              type: "strong",
+              type: 'strong',
               start: 0,
               end: 4
             }
@@ -126,19 +127,19 @@ class KramdownPrismicConverterTest < Minitest::Test
         }
       }
     ]
-    markdown = "**This** is a paragraph"
+    markdown = '**This** is a paragraph'
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
   def test_convert_paragraph_with_em
     expected = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "This is a paragraph",
+          text: 'This is a paragraph',
           spans: [
             {
-              type: "em",
+              type: 'em',
               start: 0,
               end: 4
             }
@@ -146,19 +147,19 @@ class KramdownPrismicConverterTest < Minitest::Test
         }
       }
     ]
-    markdown = "*This* is a paragraph"
+    markdown = '*This* is a paragraph'
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
   def test_convert_list_o
     expected = [
       {
-        type: "o-list-item",
+        type: 'o-list-item',
         content: {
-          text: "This is a list item",
+          text: 'This is a list item',
           spans: [
             {
-              type: "em",
+              type: 'em',
               start: 0,
               end: 4
             }
@@ -166,9 +167,9 @@ class KramdownPrismicConverterTest < Minitest::Test
         }
       },
       {
-        type: "o-list-item",
+        type: 'o-list-item',
         content: {
-          text: "This is a second list item",
+          text: 'This is a second list item',
           spans: []
         }
       }
@@ -180,12 +181,12 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_list_u
     expected = [
       {
-        type: "list-item",
+        type: 'list-item',
         content: {
-          text: "This is a list item",
+          text: 'This is a list item',
           spans: [
             {
-              type: "em",
+              type: 'em',
               start: 0,
               end: 4
             }
@@ -193,9 +194,9 @@ class KramdownPrismicConverterTest < Minitest::Test
         }
       },
       {
-        type: "list-item",
+        type: 'list-item',
         content: {
-          text: "This is a second list item",
+          text: 'This is a second list item',
           spans: []
         }
       }
@@ -207,16 +208,16 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_nested_ul
     expected = [
       {
-        type: "list-item",
+        type: 'list-item',
         content: {
           text: "item1\n",
           spans: []
         }
       },
       {
-        type: "list-item",
+        type: 'list-item',
         content: {
-          text: "item2",
+          text: 'item2',
           spans: []
         }
       }
@@ -230,23 +231,23 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_nested_nested_ul
     expected = [
       {
-        type: "list-item",
+        type: 'list-item',
         content: {
           text: "item1\n",
           spans: []
         }
       },
       {
-        type: "list-item",
+        type: 'list-item',
         content: {
           text: "item2\n",
           spans: []
         }
       },
       {
-        type: "list-item",
+        type: 'list-item',
         content: {
-          text: "item3",
+          text: 'item3',
           spans: []
         }
       }
@@ -260,7 +261,7 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_preformatted
     expected = [
       {
-        type: "preformatted",
+        type: 'preformatted',
         content: {
           text: "This is a pre block\n",
           spans: []
@@ -274,9 +275,9 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_blockquote
     expected = [
       {
-        type: "preformatted",
+        type: 'preformatted',
         content: {
-          text: "This is a blockquote",
+          text: 'This is a blockquote',
           spans: []
         }
       }
@@ -287,17 +288,18 @@ class KramdownPrismicConverterTest < Minitest::Test
 
   def test_convert_empty
     expected = []
-    markdown = ""
+    markdown = ''
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
   def test_convert_span_blank
     expected = [
-      {type: "o-list-item",
-       content: {
-         text: "Testtest",
-         spans: []
-       }
+      {
+        type: 'o-list-item',
+        content: {
+          text: 'Testtest',
+          spans: []
+        }
       }
     ]
     markdown = "\n1. Test\n\n    test\n"
@@ -306,16 +308,16 @@ class KramdownPrismicConverterTest < Minitest::Test
 
   def test_convert_hr
     expected = []
-    markdown = "---"
+    markdown = '---'
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
   def test_convert_img
     expected = [
       {
-        type: "image",
+        type: 'image',
         content: {
-          text: "",
+          text: '',
           spans: []
         },
         data: {
@@ -326,7 +328,7 @@ class KramdownPrismicConverterTest < Minitest::Test
         }
       }
     ]
-    markdown =  "![alt text](/img.png)"
+    markdown = '![alt text](/img.png)'
     doc = Kramdown::Document.new(markdown)
     assert_equal expected, doc.to_prismic
     assert_equal 0, doc.warnings.size
@@ -335,9 +337,9 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_double_img
     expected = [
       {
-        type: "image",
+        type: 'image',
         content: {
-          text: "",
+          text: '',
           spans: []
         },
         data: {
@@ -348,9 +350,9 @@ class KramdownPrismicConverterTest < Minitest::Test
         }
       },
       {
-        type: "image",
+        type: 'image',
         content: {
-          text: "",
+          text: '',
           spans: []
         },
         data: {
@@ -361,7 +363,7 @@ class KramdownPrismicConverterTest < Minitest::Test
         }
       }
     ]
-    markdown =  "![](/img.png)![](/img2.png)"
+    markdown = '![](/img.png)![](/img2.png)'
     doc = Kramdown::Document.new(markdown)
     assert_equal expected, doc.to_prismic
     assert_equal 2, doc.warnings.size
@@ -370,9 +372,9 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_img_with_link
     expected = [
       {
-        type: "image",
+        type: 'image',
         content: {
-          text: "",
+          text: '',
           spans: []
         },
         data: {
@@ -381,12 +383,12 @@ class KramdownPrismicConverterTest < Minitest::Test
           },
           alt: 'alt text',
           linkTo: {
-            url: "https://example.net/"
+            url: 'https://example.net/'
           }
         }
       }
     ]
-    markdown =  "[![alt text](/img.png)](https://example.net/)"
+    markdown = '[![alt text](/img.png)](https://example.net/)'
     doc = Kramdown::Document.new(markdown)
     assert_equal expected, doc.to_prismic
     assert_equal 0, doc.warnings.size
@@ -395,29 +397,28 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_entity
     expected = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
           text: "\u00a0",
           spans: []
         }
       }
     ]
-    markdown = "&nbsp;"
+    markdown = '&nbsp;'
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
-  [['mdash' , ' ---', ' —'],
-   ['ndash' , ' --', ' –'],
-   ['hellip' , ' ...', ' …'],
-   ['laquo' , ' <<', ' «'],
-   ['raquo' , '>>', '»'],
-   ['laquo_space' , ' << T', ' « T'],
-   ['raquo_space' , ' >>', ' »']
-  ].each do |symbol|
+  [['mdash', ' ---', ' —'],
+   ['ndash', ' --', ' –'],
+   ['hellip', ' ...', ' …'],
+   ['laquo', ' <<', ' «'],
+   ['raquo', '>>', '»'],
+   ['laquo_space', ' << T', ' « T'],
+   ['raquo_space', ' >>', ' »']].each do |symbol|
     define_method "test_convert_typographic_symbols_#{symbol[0]}" do
       expected = [
         {
-          type: "paragraph",
+          type: 'paragraph',
           content: {
             text: "Hello#{symbol[2]}",
             spans: []
@@ -431,11 +432,12 @@ class KramdownPrismicConverterTest < Minitest::Test
 
   def test_convert_smart_quote
     expected = [
-      {type: "paragraph",
-       content: {
-         text: "Test\u2019",
-         spans: []
-       }
+      {
+        type: 'paragraph',
+        content: {
+          text: "Test\u2019",
+          spans: []
+        }
       }
     ]
     markdown = "Test'"
@@ -445,14 +447,14 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_inline_code
     expected = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "Hello code",
+          text: 'Hello code',
           spans: []
         }
       }
     ]
-    markdown = "Hello `code`"
+    markdown = 'Hello `code`'
     doc = Kramdown::Document.new(markdown)
     assert_equal expected, doc.to_prismic
     assert_equal 1, doc.warnings.size
@@ -460,14 +462,13 @@ class KramdownPrismicConverterTest < Minitest::Test
 
   def test_convert_br
     expected = [
-      {type: "paragraph",
-       content: {
-         text: "Test\n",
-         spans: []
-       }
-      }
+      { type: 'paragraph',
+        content: {
+          text: "Test\n",
+          spans: []
+        } }
     ]
-    html = "<p>Test<br></p>"
+    html = '<p>Test<br></p>'
     assert_equal expected, Kramdown::Document.new(html, input: :html).to_prismic
   end
 
@@ -492,7 +493,7 @@ class KramdownPrismicConverterTest < Minitest::Test
 
   def test_convert_html
     expected = []
-    html = "<div></div>"
+    html = '<div></div>'
     doc = Kramdown::Document.new(html, input: :markdown)
     assert_equal expected, doc.to_prismic
     assert_equal 1, doc.warnings.size
@@ -501,14 +502,14 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_span_html
     expected = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "",
+          text: '',
           spans: []
         }
       }
     ]
-    html = "<br>"
+    html = '<br>'
     doc = Kramdown::Document.new(html, input: :markdown)
     assert_equal expected, doc.to_prismic
     assert_equal 1, doc.warnings.size
@@ -516,7 +517,7 @@ class KramdownPrismicConverterTest < Minitest::Test
 
   def test_convert_table
     expected = []
-    markdown = "| First cell|Second cell|Third cell|"
+    markdown = '| First cell|Second cell|Third cell|'
     doc = Kramdown::Document.new(markdown, input: :kramdown)
     assert_equal expected, doc.to_prismic
     assert_equal 1, doc.warnings.size
@@ -532,7 +533,7 @@ class KramdownPrismicConverterTest < Minitest::Test
 
   def test_convert_math
     expected = []
-    markdown = "$$ 5 + 5 $$"
+    markdown = '$$ 5 + 5 $$'
     doc = Kramdown::Document.new(markdown, input: :kramdown)
     assert_equal expected, doc.to_prismic
     assert_equal 1, doc.warnings.size
@@ -541,12 +542,13 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_footnote
     expected = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "test",
+          text: 'test',
           spans: []
         }
-      }]
+      }
+    ]
     markdown = "test[^1]\n\n[^1]: test"
     doc = Kramdown::Document.new(markdown, input: :kramdown)
     assert_equal expected, doc.to_prismic
@@ -556,12 +558,13 @@ class KramdownPrismicConverterTest < Minitest::Test
   def test_convert_abbreviation
     expected = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "HTML",
+          text: 'HTML',
           spans: []
         }
-      }]
+      }
+    ]
     markdown = "HTML\n\n*[HTML]: test"
     doc = Kramdown::Document.new(markdown, input: :kramdown)
     assert_equal expected, doc.to_prismic

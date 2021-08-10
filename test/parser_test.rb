@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require 'kramdown-prismic'
 
@@ -5,9 +7,9 @@ class KramdownPrismicParserTest < Minitest::Test
   def test_parse_heading
     prismic = [
       {
-        type: "heading1",
+        type: 'heading1',
         content: {
-          text: "This is the document title",
+          text: 'This is the document title',
           spans: []
         }
       }
@@ -20,9 +22,9 @@ class KramdownPrismicParserTest < Minitest::Test
   def test_parse_heading2
     prismic = [
       {
-        type: "heading2",
+        type: 'heading2',
         content: {
-          text: "This is an h2 title",
+          text: 'This is an h2 title',
           spans: []
         }
       }
@@ -35,9 +37,9 @@ class KramdownPrismicParserTest < Minitest::Test
   def test_parse_paragraph
     prismic = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "This is a paragraph",
+          text: 'This is a paragraph',
           spans: []
         }
       }
@@ -50,12 +52,12 @@ class KramdownPrismicParserTest < Minitest::Test
   def test_parse_paragraph_with_spans
     prismic = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "This is a paragraph",
+          text: 'This is a paragraph',
           spans: [
             {
-              type: "em",
+              type: 'em',
               start: 0,
               end: 4
             }
@@ -71,17 +73,17 @@ class KramdownPrismicParserTest < Minitest::Test
   def test_parse_paragraph_with_multiple_spans
     prismic = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "This is a paragraph",
+          text: 'This is a paragraph',
           spans: [
             {
-              type: "em",
+              type: 'em',
               start: 0,
               end: 4
             },
             {
-              type: "strong",
+              type: 'strong',
               start: 5,
               end: 7
             }
@@ -97,16 +99,16 @@ class KramdownPrismicParserTest < Minitest::Test
   def test_parse_paragraph_with_link
     prismic = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "This is a paragraph",
+          text: 'This is a paragraph',
           spans: [
             {
-              type: "hyperlink",
+              type: 'hyperlink',
               start: 0,
               end: 19,
               data: {
-                url: "https://prismic.io"
+                url: 'https://prismic.io'
               }
             }
           ]
@@ -121,21 +123,21 @@ class KramdownPrismicParserTest < Minitest::Test
   def test_parse_paragraph_with_nested_spans
     prismic = [
       {
-        type: "paragraph",
+        type: 'paragraph',
         content: {
-          text: "This is a paragraph",
+          text: 'This is a paragraph',
           spans: [
             {
-              type: "em",
+              type: 'em',
               start: 0,
               end: 4
             },
             {
-              type: "hyperlink",
+              type: 'hyperlink',
               start: 0,
               end: 19,
               data: {
-                url: "https://prismic.io"
+                url: 'https://prismic.io'
               }
             }
           ]
@@ -150,9 +152,9 @@ class KramdownPrismicParserTest < Minitest::Test
   def test_parse_image
     prismic = [
       {
-        type: "image",
+        type: 'image',
         content: {
-          text: "",
+          text: '',
           spans: []
         },
         data: {
@@ -171,7 +173,7 @@ class KramdownPrismicParserTest < Minitest::Test
   def test_parse_preformatted
     prismic = [
       {
-        type: "preformatted",
+        type: 'preformatted',
         content: {
           text: "This is a pre block\n",
           spans: []
@@ -186,13 +188,13 @@ class KramdownPrismicParserTest < Minitest::Test
   def test_parse_embed
     prismic = [
       {
-        type: "embed",
+        type: 'embed',
         data: {
-          type: "video",
-          embed_url: "https://www.youtube.com/watch?v=y6y_4_b6RS8"
+          type: 'video',
+          embed_url: 'https://www.youtube.com/watch?v=y6y_4_b6RS8'
         },
         content: {
-          text: "",
+          text: '',
           spans: []
         }
       }

@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'kramdown/converter/base'
 
 module Kramdown
   module Converter
     class Prismic < Base
       def convert(root)
-        cleanup_ast(root).map { |child|
+        cleanup_ast(root).map do |child|
           convert_element(child)
-        }.compact.flatten
+        end.compact.flatten
       end
 
       private
@@ -21,22 +23,23 @@ module Kramdown
       end
 
       def remove_blanks(root)
-        root.children = root.children.inject([]) do |memo, child|
+        root.children = root.children.each_with_object([]) do |child, memo|
           unless child.type == :blank
             remove_blanks(child)
             memo << child
           end
-          memo
         end
       end
 
       def extract_non_nestable_elements(child, elements)
-        child.children = child.children.inject([]) do |memo, element|
-          if element.type == :a && element.children.size === 1 && element.children.first.type == :img
+        child.children = child.children.each_with_object([]) do |element, memo|
+          if element.type == :a && element.children.size == 1 && element.children.first.type == :img
             elements << element
           elsif element.type == :img
             elements << element
-            warning('images inside content will be moved to the top level and may be rendered differently') if child.children.size > 1
+            if child.children.size > 1
+              warning('images inside content will be moved to the top level and may be rendered differently')
+            end
           elsif element.type == :ul
             warning('nested list moved to the top level')
             elements << element
@@ -45,7 +48,6 @@ module Kramdown
             memo << element
             extract_non_nestable_elements(element, elements)
           end
-          memo
         end
       end
 
@@ -61,9 +63,10 @@ module Kramdown
       end
 
       def convert_p(element)
-        return nil if element.children.size == 0
+        return nil if element.children.size.zero?
+
         {
-          type: "paragraph",
+          type: 'paragraph',
           content: extract_content(element)
         }
       end
@@ -106,8 +109,7 @@ module Kramdown
         }
       end
 
-      def convert_hr(element)
-      end
+      def convert_hr(element); end
 
       def convert_img(element)
         {
@@ -118,9 +120,9 @@ module Kramdown
           },
           data: {
             origin: {
-              url: element.attr["src"]
+              url: element.attr['src']
             },
-            alt: element.attr["alt"]
+            alt: element.attr['alt']
           }
         }
       end
@@ -153,11 +155,11 @@ module Kramdown
               spans: [],
               text: ''
             },
-           type: 'embed',
-           data: {
-             embed_url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-             type: 'link',
-           }
+            type: 'embed',
+            data: {
+              embed_url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+              type: 'link'
+            }
           }
         else
           warning('translating html elements is not supported')
@@ -165,35 +167,34 @@ module Kramdown
         end
       end
 
-      def convert_table(element)
+      def convert_table(_element)
         warning('translating table is not supported')
         nil
       end
 
-      def convert_dl(element)
+      def convert_dl(_element)
         warning('translating dl is not supported')
         nil
       end
 
-      def convert_math(element)
+      def convert_math(_element)
         warning('translating math is not supported')
         nil
       end
 
-      def convert_comment(element)
+      def convert_comment(_element)
         warning('translating comment is not supported')
         nil
       end
 
-      def convert_raw(element)
+      def convert_raw(_element)
         warning('translating raw is not supported')
         nil
       end
 
-      def extract_content(element, memo={text: '', spans: []})
-        element.children.inject(memo) do |memo2, child|
+      def extract_content(element, memo = { text: '', spans: [] })
+        element.children.each_with_object(memo) do |child, memo2|
           send("extract_span_#{child.type}", child, memo2)
-          memo2
         end
       end
 
@@ -214,7 +215,7 @@ module Kramdown
         insert_span(element, memo, {
                       type: 'hyperlink',
                       data: {
-                        url: element.attr["href"]
+                        url: element.attr['href']
                       }
                     })
       end
@@ -235,7 +236,7 @@ module Kramdown
         extract_content(element, memo)
       end
 
-      def extract_span_br(element, memo)
+      def extract_span_br(_element, memo)
         memo[:text] += "\n"
       end
 
@@ -244,11 +245,11 @@ module Kramdown
         memo[:text] += element.value
       end
 
-      def extract_span_html_element(element, memo)
+      def extract_span_html_element(_element, _memo)
         warning('translating html elements is not supported')
       end
 
-      def extract_span_footnote(element, memo)
+      def extract_span_footnote(_element, _memo)
         warning('translating footnote is not supported')
       end
 
@@ -265,9 +266,9 @@ module Kramdown
         raquo_space: [::Kramdown::Utils::Entities.entity('nbsp'), ::Kramdown::Utils::Entities.entity('raquo')],
         laquo: [::Kramdown::Utils::Entities.entity('laquo')],
         raquo: [::Kramdown::Utils::Entities.entity('raquo')]
-      }
+      }.freeze
       def extract_span_typographic_sym(element, memo)
-        value = TYPOGRAPHIC_SYMS[element.value].map {|e| e.char }.join('')
+        value = TYPOGRAPHIC_SYMS[element.value].map(&:char).join('')
         memo[:text] += value
       end
 
