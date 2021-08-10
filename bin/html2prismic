@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'kramdown-prismic'
+require 'json'
+
+print Kramdown::Document.new(ARGV[0], input: :html).to_prismic.to_json.to_s

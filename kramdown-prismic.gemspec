@@ -10,6 +10,9 @@ Gem::Specification.new do |s|
   s.authors     = ['François de Metz']
   s.email       = 'francois@2metz.fr'
 
+  s.executables << 'markdown2prismic'
+  s.executables << 'html2prismic'
+  s.executables << 'prismic2markdown'
   s.files       = `git ls-files`.split("\n")
   s.test_files  = `git ls-files -- test/*`.split("\n")
 
