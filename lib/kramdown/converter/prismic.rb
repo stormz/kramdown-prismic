@@ -32,7 +32,9 @@ module Kramdown
 
       def extract_non_nestable_elements(child, elements)
         child.children = child.children.inject([]) do |memo, element|
-          if element.type == :img
+          if element.type == :a && element.children.size === 1 && element.children.first.type == :img
+            elements << element
+          elsif element.type == :img
             elements << element
             warning('images inside content will be moved to the top level and may be rendered differently') if child.children.size > 1
           elsif element.type == :ul
@@ -119,6 +121,27 @@ module Kramdown
               url: element.attr["src"]
             },
             alt: element.attr["alt"]
+          }
+        }
+      end
+
+      # This can only apply when an link with an image inside has been detected
+      def convert_a(element)
+        image = element.children.first
+        {
+          type: 'image',
+          content: {
+            text: '',
+            spans: []
+          },
+          data: {
+            origin: {
+              url: image.attr['src']
+            },
+            alt: image.attr['alt'],
+            linkTo: {
+              url: element.attr['href']
+            }
           }
         }
       end

@@ -367,6 +367,31 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal 2, doc.warnings.size
   end
 
+  def test_convert_img_with_link
+    expected = [
+      {
+        type: "image",
+        content: {
+          text: "",
+          spans: []
+        },
+        data: {
+          origin: {
+            url: '/img.png'
+          },
+          alt: 'alt text',
+          linkTo: {
+            url: "https://example.net/"
+          }
+        }
+      }
+    ]
+    markdown =  "[![alt text](/img.png)](https://example.net/)"
+    doc = Kramdown::Document.new(markdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 0, doc.warnings.size
+  end
+
   def test_convert_entity
     expected = [
       {
