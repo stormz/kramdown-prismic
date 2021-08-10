@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 0.2.1
+
+- Parse embed elements
+- Convert inline code
+
+## Version 0.2.0
+
+- Add parser to convert prismic to markdown
+
 ## Version 0.1.2
 
 - fix output with empty paragraph
