@@ -417,6 +417,22 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal expected, Kramdown::Document.new(markdown, input: :kramdown).to_prismic
   end
 
+  def test_convert_inline_code
+    expected = [
+      {
+        type: "paragraph",
+        content: {
+          text: "Hello code",
+          spans: []
+        }
+      }
+    ]
+    markdown = "Hello `code`"
+    doc = Kramdown::Document.new(markdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
+
   def test_convert_br
     expected = [
       {type: "paragraph",

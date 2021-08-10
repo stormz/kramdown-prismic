@@ -212,6 +212,11 @@ module Kramdown
         memo[:text] += "\n"
       end
 
+      def extract_span_codespan(element, memo)
+        warning('translating inline code is not supported')
+        memo[:text] += element.value
+      end
+
       def extract_span_html_element(element, memo)
         warning('translating html elements is not supported')
       end
