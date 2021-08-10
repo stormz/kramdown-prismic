@@ -192,6 +192,16 @@ module Kramdown
         nil
       end
 
+      def convert_text(element)
+        {
+          type: 'paragraph',
+          content: {
+            text: element.value,
+            spans: []
+          }
+        }
+      end
+
       def extract_content(element, memo = { text: '', spans: [] })
         element.children.each_with_object(memo) do |child, memo2|
           send("extract_span_#{child.type}", child, memo2)
