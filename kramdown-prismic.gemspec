@@ -4,8 +4,8 @@ require File.expand_path('../lib/kramdown-prismic/version', __FILE__)
 Gem::Specification.new do |s|
   s.name        = 'kramdown-prismic'
   s.version     = KramdownPrismic::VERSION
-  s.summary     = "A Kramdown converter to convert documents into prismic rich text format."
-  s.description = "A Kramdown converter to convert documents into prismic rich text format."
+  s.summary     = "A Kramdown converter to convert documents into prismic rich text format and the other way around."
+  s.description = "A Kramdown converter to convert documents into prismic rich text format and the other way around."
   s.authors     = ["François de Metz"]
   s.email       = 'francois@2metz.fr'
 
