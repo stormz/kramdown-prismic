@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.3.0
+
+- Relax the kramdown dependency to allows the version 2.
+- XML elements support have been removed.
+
 ## Version 0.2.2
 
 - Convert links with only an image inside. See #1.
