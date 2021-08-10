@@ -471,6 +471,25 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal expected, Kramdown::Document.new(html, input: :html).to_prismic
   end
 
+  def test_convert_iframe
+    expected = [
+      {
+        type: 'embed',
+        content: {
+          text: '',
+          spans: []
+        },
+        data: {
+          embed_url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          type: 'link'
+        }
+      }
+    ]
+    html = '<iframe src="https://www.youtube.com/watch?v=dQw4w9WgXcQ"></iframe>'
+    doc = Kramdown::Document.new(html, input: :markdown)
+    assert_equal expected, doc.to_prismic
+  end
+
   def test_convert_html
     expected = []
     html = "<div></div>"

@@ -147,8 +147,22 @@ module Kramdown
       end
 
       def convert_html_element(element)
-        warning('translating html elements is not supported')
-        nil
+        if element.value == 'iframe'
+          {
+            content: {
+              spans: [],
+              text: ''
+            },
+           type: 'embed',
+           data: {
+             embed_url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+             type: 'link',
+           }
+          }
+        else
+          warning('translating html elements is not supported')
+          nil
+        end
       end
 
       def convert_table(element)
