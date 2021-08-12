@@ -3,4 +3,6 @@
 require 'kramdown-prismic'
 require 'json'
 
-print Kramdown::Document.new(JSON.parse(ARGV[0]), input: :prismic).to_kramdown
+source = JSON.parse(ARGV[0], symbolize_names: true)
+
+print Kramdown::Document.new(source, input: :prismic).to_kramdown
