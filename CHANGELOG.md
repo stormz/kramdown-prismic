@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.3.1
+
+- Add binaries `html2primisc`, `markdown2prismic` and `primisc2markdown`.
+- Add parsed embed support
+
 ## Version 0.3.0
 
 - Relax the kramdown dependency to allows the version 2.
