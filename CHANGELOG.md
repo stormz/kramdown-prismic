@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.3.2
+
+- Parse ordered and unordered lists
+- Parse image with link
+
 ## Version 0.3.1
 
 - Add binaries `html2primisc`, `markdown2prismic` and `primisc2markdown`.
