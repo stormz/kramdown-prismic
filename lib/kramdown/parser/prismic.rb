@@ -5,16 +5,28 @@ module Kramdown
     class Prismic < Base
       def parse
         @root.options[:encoding] = 'UTF-8'
-        @root.children = @source.map do |block|
-          type = block[:type]
-          type = 'heading' if type.match(/heading/)
-          element = send("parse_#{type}", block)
-          parse_spans(element, block)
-          element
+        @root.children = @source.reduce([]) do |memo, block|
+          parse_element(block, memo)
         end
       end
 
       private
+
+      def parse_element(block, memo)
+        type = block[:type].gsub('-', '_')
+        type = 'heading' if type.match(/heading/)
+        if type == 'list_item'
+          parse_list(:ul, block, memo)
+          memo
+        elsif type == 'o_list_item'
+          parse_list(:ol, block, memo)
+          memo
+        else
+          element = send("parse_#{type}", block)
+          parse_spans(element, block)
+          memo << element
+        end
+      end
 
       def parse_heading(block)
         level = block[:type].match(/heading([1-6])/)[1].to_i
@@ -34,6 +46,19 @@ module Kramdown
 
       def parse_preformatted(_block)
         Kramdown::Element.new(:blockquote)
+      end
+
+      def parse_list(type, block, memo)
+        list = memo.last
+        unless list && list.type == type
+          list = Kramdown::Element.new(type)
+          memo << list
+        end
+        li = Kramdown::Element.new(:li, nil, nil)
+        list.children << li
+        p = Kramdown::Element.new(:p, nil, nil, transparent: true)
+        li.children << p
+        parse_spans(p, block)
       end
 
       def parse_embed(block)

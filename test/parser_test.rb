@@ -136,6 +136,114 @@ class KramdownPrismicParserTest < Minitest::Test
     assert_equal expected, doc.to_kramdown
   end
 
+  def test_parse_list_item
+    prismic = [
+      {
+        type: 'list-item',
+        content: {
+          text: 'Hello',
+          spans: []
+        }
+      },
+      {
+        type: 'list-item',
+        content: {
+          text: 'World',
+          spans: []
+        }
+      }
+    ]
+    expected = "* Hello\n* World\n\n"
+    doc = Kramdown::Document.new(prismic, input: :prismic)
+    assert_equal expected, doc.to_kramdown
+  end
+
+  def test_parse_list_item_and_spans
+    prismic = [
+      {
+        type: 'list-item',
+        content: {
+          text: 'Hello',
+          spans: [
+            {
+              type: 'em',
+              start: 0,
+              end: 5
+            }
+          ]
+        }
+      },
+      {
+        type: 'list-item',
+        content: {
+          text: 'World',
+          spans: []
+        }
+      }
+    ]
+    expected = "* *Hello*\n* World\n\n"
+    doc = Kramdown::Document.new(prismic, input: :prismic)
+    assert_equal expected, doc.to_kramdown
+  end
+
+  def test_parse_o_list_item
+    prismic = [
+      {
+        type: 'o-list-item',
+        content: {
+          text: 'Hello',
+          spans: []
+        }
+      },
+      {
+        type: 'o-list-item',
+        content: {
+          text: 'World',
+          spans: []
+        }
+      }
+    ]
+    expected = "1.  Hello\n2.  World\n\n"
+    doc = Kramdown::Document.new(prismic, input: :prismic)
+    assert_equal expected, doc.to_kramdown
+  end
+
+  def test_parse_o_list_item_and_list_item
+    prismic = [
+      {
+        type: 'o-list-item',
+        content: {
+          text: 'Hello',
+          spans: []
+        }
+      },
+      {
+        type: 'o-list-item',
+        content: {
+          text: 'World',
+          spans: []
+        }
+      },
+      {
+        type: 'list-item',
+        content: {
+          text: 'Test',
+          spans: []
+        }
+      },
+      {
+        type: 'list-item',
+        content: {
+          text: 'roger',
+          spans: []
+        }
+      }
+    ]
+    expected = "1.  Hello\n2.  World\n\n* Test\n* roger\n\n"
+    doc = Kramdown::Document.new(prismic, input: :prismic)
+    assert_equal expected, doc.to_kramdown
+  end
+
   def test_parse_image
     prismic = [
       {
