@@ -8,7 +8,7 @@ A useful usage is to convert markdown documents to prismic for [import purpose][
 
 The converter part (kramdown to prismic) is working and fairly complete. See *Difference between markdown and rich text* below to know more about limitations.
 
-The parser part is quite new and not feature complete (missing list item for instance).
+The parser part is quite new and not feature complete.
 
 ## Install
 
