@@ -30,18 +30,18 @@ module Kramdown
 
       def parse_heading(block)
         level = block[:type].match(/heading([1-6])/)[1].to_i
-        Kramdown::Element.new(:header, nil, nil, { level: level, raw_text: '' })
+        Element.new(:header, nil, nil, { level: level, raw_text: '' })
       end
 
       def parse_paragraph(_block)
-        Kramdown::Element.new(:p)
+        Element.new(:p)
       end
 
       def parse_image(block)
-        p = Kramdown::Element.new(:p)
-        img = Kramdown::Element.new(:img, nil, { 'src' => block[:data][:origin][:url], 'alt' => block[:data][:alt] })
+        p = Element.new(:p)
+        img = Element.new(:img, nil, { 'src' => block[:data][:origin][:url], 'alt' => block[:data][:alt] })
         if block[:data][:linkTo]
-          a = Kramdown::Element.new(:a, nil, { 'href' => block[:data][:linkTo][:url] })
+          a = Element.new(:a, nil, { 'href' => block[:data][:linkTo][:url] })
           a.children << img
           p.children << a
         else
@@ -51,24 +51,24 @@ module Kramdown
       end
 
       def parse_preformatted(_block)
-        Kramdown::Element.new(:blockquote)
+        Element.new(:blockquote)
       end
 
       def parse_list(type, block, memo)
         list = memo.last
         unless list && list.type == type
-          list = Kramdown::Element.new(type)
+          list = Element.new(type)
           memo << list
         end
-        li = Kramdown::Element.new(:li, nil, nil)
+        li = Element.new(:li, nil, nil)
         list.children << li
-        p = Kramdown::Element.new(:p, nil, nil, transparent: true)
+        p = Element.new(:p, nil, nil, transparent: true)
         li.children << p
         parse_spans(p, block)
       end
 
       def parse_embed(block)
-        Kramdown::Element.new(:html_element, 'iframe', { src: block[:data][:embed_url] })
+        Element.new(:html_element, 'iframe', { src: block[:data][:embed_url] })
       end
 
       def parse_spans(element, block)

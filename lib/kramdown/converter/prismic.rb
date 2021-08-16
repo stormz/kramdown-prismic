@@ -269,13 +269,13 @@ module Kramdown
       end
 
       TYPOGRAPHIC_SYMS = {
-        mdash: [::Kramdown::Utils::Entities.entity('mdash')],
-        ndash: [::Kramdown::Utils::Entities.entity('ndash')],
-        hellip: [::Kramdown::Utils::Entities.entity('hellip')],
-        laquo_space: [::Kramdown::Utils::Entities.entity('laquo'), ::Kramdown::Utils::Entities.entity('nbsp')],
-        raquo_space: [::Kramdown::Utils::Entities.entity('nbsp'), ::Kramdown::Utils::Entities.entity('raquo')],
-        laquo: [::Kramdown::Utils::Entities.entity('laquo')],
-        raquo: [::Kramdown::Utils::Entities.entity('raquo')]
+        mdash: [Utils::Entities.entity('mdash')],
+        ndash: [Utils::Entities.entity('ndash')],
+        hellip: [Utils::Entities.entity('hellip')],
+        laquo_space: [Utils::Entities.entity('laquo'), Utils::Entities.entity('nbsp')],
+        raquo_space: [Utils::Entities.entity('nbsp'), Utils::Entities.entity('raquo')],
+        laquo: [Utils::Entities.entity('laquo')],
+        raquo: [Utils::Entities.entity('raquo')]
       }.freeze
       def extract_span_typographic_sym(element, memo)
         value = TYPOGRAPHIC_SYMS[element.value].map(&:char).join('')
@@ -287,7 +287,7 @@ module Kramdown
       end
 
       def extract_span_smart_quote(element, memo)
-        memo[:text] += ::Kramdown::Utils::Entities.entity(element.value.to_s).char
+        memo[:text] += Utils::Entities.entity(element.value.to_s).char
       end
     end
   end
