@@ -265,6 +265,30 @@ class KramdownPrismicParserTest < Minitest::Test
     assert_equal expected, doc.to_kramdown
   end
 
+  def test_parse_img_with_link
+    prismic = [
+      {
+        type: 'image',
+        content: {
+          text: '',
+          spans: []
+        },
+        data: {
+          origin: {
+            url: '/img.png'
+          },
+          alt: 'alt text',
+          linkTo: {
+            url: 'https://example.net/'
+          }
+        }
+      }
+    ]
+    expected = "[![alt text](/img.png)][1]\n\n\n\n[1]: https://example.net/\n"
+    doc = Kramdown::Document.new(prismic, input: :prismic)
+    assert_equal expected, doc.to_kramdown
+  end
+
   def test_parse_preformatted
     prismic = [
       {

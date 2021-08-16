@@ -40,7 +40,13 @@ module Kramdown
       def parse_image(block)
         p = Kramdown::Element.new(:p)
         img = Kramdown::Element.new(:img, nil, { 'src' => block[:data][:origin][:url], 'alt' => block[:data][:alt] })
-        p.children << img
+        if block[:data][:linkTo]
+          a = Kramdown::Element.new(:a, nil, { 'href' => block[:data][:linkTo][:url] })
+          a.children << img
+          p.children << a
+        else
+          p.children << img
+        end
         p
       end
 
