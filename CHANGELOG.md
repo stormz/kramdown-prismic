@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.3.3
+
+- Renable converting xml comments
+
 ## Version 0.3.2
 
 - Parse ordered and unordered lists
