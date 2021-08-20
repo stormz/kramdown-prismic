@@ -587,6 +587,30 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal 1, doc.warnings.size
   end
 
+  def test_convert_xml_comment
+    expected = []
+    markdown = "<!-- Main -->"
+    doc = Kramdown::Document.new(markdown, input: :kramdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
+
+  def test_convert_span_xml_comment
+    expected = [
+      {
+        type: 'paragraph',
+        content: {
+          text: 'test  test',
+          spans: []
+        }
+      }
+    ]
+    markdown = "test <!-- Main --> test"
+    doc = Kramdown::Document.new(markdown, input: :kramdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
+
   def test_convert_comment
     expected = []
     markdown = "{::comment}\nComment\n{:/comment}"

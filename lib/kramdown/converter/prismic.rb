@@ -187,6 +187,11 @@ module Kramdown
         nil
       end
 
+      def convert_xml_comment(_element)
+        warning('translating xml comment is not supported')
+        nil
+      end
+
       def convert_raw(_element)
         warning('translating raw is not supported')
         nil
@@ -266,6 +271,10 @@ module Kramdown
       def extract_span_abbreviation(element, memo)
         warning('translating abbreviation is not supported')
         memo[:text] += element.value
+      end
+
+      def extract_span_xml_comment(element, memo)
+        warning('translating xml comment is not supported')
       end
 
       TYPOGRAPHIC_SYMS = {
