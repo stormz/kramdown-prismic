@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.3.4
+
+- Convert `strong` and `em` elements when converting HTML documents.
+
 ## Version 0.3.3
 
 - Renable converting xml comments
