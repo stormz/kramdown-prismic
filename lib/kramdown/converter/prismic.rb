@@ -148,6 +148,23 @@ module Kramdown
         }
       end
 
+      def convert_strong(element)
+        convert_sub_html_element(element, 'strong')
+      end
+
+      def convert_em(element)
+        convert_sub_html_element(element, 'em')
+      end
+
+      def convert_sub_html_element(element, type)
+        content = extract_content(element)
+        content[:spans].push({ type: type, start: 0, end: content[:text].size })
+        {
+          type: 'paragraph',
+          content: content
+        }
+      end
+
       def convert_html_element(element)
         if element.value == 'iframe'
           {

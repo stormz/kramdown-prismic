@@ -131,6 +131,26 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
   end
 
+  def test_convert_html_strong
+    expected = [
+      {
+        type: 'paragraph',
+        content: {
+          text: 'This is a paragraph',
+          spans: [
+            {
+              type: 'strong',
+              start: 0,
+              end: 19
+            }
+          ]
+        }
+      }
+    ]
+    markdown = '<strong>This is a paragraph</strong>'
+    assert_equal expected, Kramdown::Document.new(markdown, input: :html).to_prismic
+  end
+
   def test_convert_paragraph_with_em
     expected = [
       {
@@ -149,6 +169,26 @@ class KramdownPrismicConverterTest < Minitest::Test
     ]
     markdown = '*This* is a paragraph'
     assert_equal expected, Kramdown::Document.new(markdown, input: :markdown).to_prismic
+  end
+
+  def test_convert_html_em
+    expected = [
+      {
+        type: 'paragraph',
+        content: {
+          text: 'This',
+          spans: [
+            {
+              type: 'em',
+              start: 0,
+              end: 4
+            }
+          ]
+        }
+      }
+    ]
+    markdown = '<em>This</em>'
+    assert_equal expected, Kramdown::Document.new(markdown, input: :html).to_prismic
   end
 
   def test_convert_list_o
