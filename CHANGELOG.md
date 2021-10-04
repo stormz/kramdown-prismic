@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.3.5
+
+- Convert `br` element when converting HTML documents.
+
 ## Version 0.3.4
 
 - Convert `strong` and `em` elements when converting HTML documents.
