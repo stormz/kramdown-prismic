@@ -514,6 +514,20 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal expected, Kramdown::Document.new(html, input: :html).to_prismic
   end
 
+  def test_convert_br_in_root_element
+    expected = [
+      {
+        type: 'paragraph',
+        content: {
+          text: "Test\n",
+          spans: []
+        }
+      }
+    ]
+    html = '<br><p>Test<br></p>'
+    assert_equal expected, Kramdown::Document.new(html, input: :html).to_prismic
+  end
+
   def test_convert_html_with_no_tags
     expected = [
       {

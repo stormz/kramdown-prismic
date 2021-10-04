@@ -110,6 +110,7 @@ module Kramdown
       end
 
       def convert_hr(element); end
+      def convert_br(element); end
 
       def convert_img(element)
         {
