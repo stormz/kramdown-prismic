@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.3.6
+
+- Fix converting nested numbered list.
+
 ## Version 0.3.5
 
 - Convert `br` element when converting HTML documents.
