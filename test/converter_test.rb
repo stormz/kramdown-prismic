@@ -268,6 +268,29 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal 1, doc.warnings.size
   end
 
+  def test_convert_nested_ol
+    expected = [
+      {
+        type: 'list-item',
+        content: {
+          text: "item1\n",
+          spans: []
+        }
+      },
+      {
+        type: 'o-list-item',
+        content: {
+          text: 'item2',
+          spans: []
+        }
+      }
+    ]
+    markdown = "- item1\n  1. item2"
+    doc = Kramdown::Document.new(markdown, input: :markdown)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
+
   def test_convert_nested_nested_ul
     expected = [
       {

@@ -40,7 +40,7 @@ module Kramdown
             if child.children.size > 1
               warning('images inside content will be moved to the top level and may be rendered differently')
             end
-          elsif element.type == :ul
+          elsif [:ul, :ol].include?(element.type)
             warning('nested list moved to the top level')
             elements << element
             extract_non_nestable_elements(element, elements)
