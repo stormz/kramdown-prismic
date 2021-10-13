@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.3.7
+
+- Fix converting nested headers
+
 ## Version 0.3.6
 
 - Fix converting nested numbered list.
