@@ -321,7 +321,7 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal 2, doc.warnings.size
   end
 
- def test_convert_heading_in_list
+  def test_convert_heading_in_list
     expected = [
       {
         type: 'list-item',
