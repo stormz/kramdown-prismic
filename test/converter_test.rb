@@ -321,6 +321,29 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal 2, doc.warnings.size
   end
 
+ def test_convert_heading_in_list
+    expected = [
+      {
+        type: 'list-item',
+        content: {
+          text: "",
+          spans: []
+        }
+      },
+      {
+        type: 'heading4',
+        content: {
+          text: 'Title',
+          spans: []
+        }
+      }
+    ]
+    html = "<ul><li><h4>Title</h4></li></ul>"
+    doc = Kramdown::Document.new(html, input: :html)
+    assert_equal expected, doc.to_prismic
+    assert_equal 1, doc.warnings.size
+  end
+
   def test_convert_preformatted
     expected = [
       {

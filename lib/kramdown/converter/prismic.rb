@@ -44,6 +44,10 @@ module Kramdown
             warning('nested list moved to the top level')
             elements << element
             extract_non_nestable_elements(element, elements)
+          elsif element.type == :header
+            warning('header moved to the top level')
+            elements << element
+            extract_non_nestable_elements(element, elements)
           else
             memo << element
             extract_non_nestable_elements(element, elements)
