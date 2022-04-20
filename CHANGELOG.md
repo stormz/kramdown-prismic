@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.3.8
+
+- Convert nested html_elements when converting from HTML.
+
 ## Version 0.3.7
 
 - Fix converting nested headers
