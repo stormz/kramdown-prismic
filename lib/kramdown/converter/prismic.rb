@@ -282,8 +282,12 @@ module Kramdown
         memo[:text] += element.value
       end
 
-      def extract_span_html_element(_element, _memo)
-        warning('translating html elements is not supported')
+      def extract_span_html_element(element, memo)
+        if respond_to?("extract_span_#{element.value}", true)
+          send("extract_span_#{element.value}", element, memo)
+        else
+          warning("translating html element '#{element.value}' is not supported")
+        end
       end
 
       def extract_span_footnote(_element, _memo)

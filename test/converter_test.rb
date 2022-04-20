@@ -615,12 +615,34 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal 1, doc.warnings.size
   end
 
-  def test_convert_span_html
+  def test_convert_span_html_strong
     expected = [
       {
         type: 'paragraph',
         content: {
-          text: '',
+          text: 'This is a  paragraph',
+          spans: [
+            {
+              type: 'strong',
+              start: 10,
+              end: 20
+            }
+          ]
+        }
+      }
+    ]
+    html = '<p>This is a <strong> paragraph</strong></p>'
+    doc = Kramdown::Document.new(html, input: :html)
+    assert_equal expected, doc.to_prismic
+    assert_equal 0, doc.warnings.size
+  end
+
+  def test_convert_span_html_br
+    expected = [
+      {
+        type: 'paragraph',
+        content: {
+          text: "\n",
           spans: []
         }
       }
@@ -628,7 +650,24 @@ class KramdownPrismicConverterTest < Minitest::Test
     html = '<br>'
     doc = Kramdown::Document.new(html, input: :markdown)
     assert_equal expected, doc.to_prismic
+    assert_equal 0, doc.warnings.size
+  end
+
+   def test_convert_span_html_unknown
+    expected = [
+      {
+        type: 'paragraph',
+        content: {
+          text: 'This is a ',
+          spans: []
+        }
+      }
+    ]
+    html = '<p>This is a <details>detail</details></p>'
+    doc = Kramdown::Document.new(html, input: :html)
+    assert_equal expected, doc.to_prismic
     assert_equal 1, doc.warnings.size
+    assert_equal "translating html element 'details' is not supported", doc.warnings.first
   end
 
   def test_convert_table
