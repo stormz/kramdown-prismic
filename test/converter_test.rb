@@ -575,11 +575,16 @@ class KramdownPrismicConverterTest < Minitest::Test
   end
 
   def test_convert_html_with_no_tags
+    expected_text = if Gem::Version.new(Kramdown::VERSION) >= Gem::Version.new("2.3.2")
+                      "Test "
+                    else
+                      "Test\n"
+                    end
     expected = [
       {
         type: 'paragraph',
         content: {
-          text: "Test",
+          text: expected_text,
           spans: []
         }
       }
