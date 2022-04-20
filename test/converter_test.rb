@@ -653,7 +653,7 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal 0, doc.warnings.size
   end
 
-   def test_convert_span_html_unknown
+  def test_convert_span_html_unknown
     expected = [
       {
         type: 'paragraph',
