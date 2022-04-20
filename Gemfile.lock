@@ -7,7 +7,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    kramdown (2.3.1)
+    kramdown (2.3.2)
       rexml
     minitest (5.10.3)
     rake (13.0.6)

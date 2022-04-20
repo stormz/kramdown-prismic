@@ -579,7 +579,7 @@ class KramdownPrismicConverterTest < Minitest::Test
       {
         type: 'paragraph',
         content: {
-          text: "Test\n",
+          text: "Test",
           spans: []
         }
       }
