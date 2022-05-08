@@ -249,10 +249,12 @@ module Kramdown
       end
 
       def extract_span_a(element, memo)
+        target = element.attr['target']
         insert_span(element, memo, {
                       type: 'hyperlink',
                       data: {
-                        url: element.attr['href']
+                        url: element.attr['href'],
+                        **(target ? { target: target } : {}),
                       }
                     })
       end

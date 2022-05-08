@@ -612,6 +612,21 @@ class KramdownPrismicConverterTest < Minitest::Test
     assert_equal expected, doc.to_prismic
   end
 
+  def test_convert_link
+    expected = [
+      {
+        type: 'paragraph',
+        content: {
+          text: 'Test',
+          spans: [{type: 'hyperlink', data: {url: 'http://example.net', target: '_blank'}, start: 0, end: 4}]
+        }
+      }
+    ]
+    html = '<a href="http://example.net" target="_blank">Test</a>'
+    doc = Kramdown::Document.new(html, input: :markdown)
+    assert_equal expected, doc.to_prismic
+  end
+
   def test_convert_html
     expected = []
     html = '<div></div>'
