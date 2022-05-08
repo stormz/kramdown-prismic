@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.3.9
+
+- Convert the target attribute on links
+
 ## Version 0.3.8
 
 - Convert nested html_elements when converting from HTML.
