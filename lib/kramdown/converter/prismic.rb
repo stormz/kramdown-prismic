@@ -173,14 +173,14 @@ module Kramdown
       def convert_html_element(element)
         if element.value == 'iframe'
           {
-            content: {
-              spans: [],
-              text: ''
-            },
             type: 'embed',
             data: {
               embed_url: element.attr['src'],
-              type: 'link'
+              type: 'video'
+            },
+            content: {
+              spans: [],
+              text: ''
             }
           }
         else
