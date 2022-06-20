@@ -179,7 +179,7 @@ module Kramdown
             },
             type: 'embed',
             data: {
-              embed_url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+              embed_url: element.attr['src'],
               type: 'link'
             }
           }
