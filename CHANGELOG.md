@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.3.10
+
+- Fix the embed_url conversion
+
 ## Version 0.3.9
 
 - Convert the target attribute on links
