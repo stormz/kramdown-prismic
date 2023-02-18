@@ -1,4 +1,4 @@
-# Kramdown Prismic ![build](https://img.shields.io/github/workflow/status/stormz/kramdown-prismic/CI) [![gem](https://img.shields.io/gem/v/kramdown-prismic)](https://rubygems.org/gems/kramdown-prismic)
+# Kramdown Prismic ![build](https://img.shields.io/github/actions/workflow/status/stormz/kramdown-prismic/ci.yml?branch=master) [![gem](https://img.shields.io/gem/v/kramdown-prismic)](https://rubygems.org/gems/kramdown-prismic)
 
 A [Kramdown][] parser and converter to convert documents into [prismic][] rich text format and the other way around.
 
