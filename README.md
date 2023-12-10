@@ -4,6 +4,8 @@ A [Kramdown][] parser and converter to convert documents into [prismic][] rich t
 
 A useful usage is to convert markdown documents to prismic for [import purpose][prismic-import]. Then you can even convert prismic format back to markdown.
 
+[Learn more how to import markdown document to Prismic](https://2metz.fr/blog/import-markdown-into-prismic/).
+
 ## Status
 
 The converter part (kramdown to prismic) is working and fairly complete. See *Difference between markdown and rich text* below to know more about limitations.
