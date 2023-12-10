@@ -77,6 +77,8 @@ prismic = [
 Kramdown::Document.new(prismic, input: :prismic).to_kramdown
 ```
 
+You can also convert to or from others formats supported by Kramdown. See [kramdown documentation](https://kramdown.gettalong.org/documentation.html).
+
 ### Lookup for warnings
 
 If there is some elements that cannot be converted (see the status table), a warning will be emitted.
