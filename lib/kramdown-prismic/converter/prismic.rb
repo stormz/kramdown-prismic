@@ -2,9 +2,12 @@
 
 require 'kramdown/converter/base'
 
-module Kramdown
+module KramdownPrismic
   module Converter
-    class Prismic < Base
+    Utils = Kramdown::Utils
+    Element = Kramdown::Element
+
+    class Prismic < Kramdown::Converter::Base
       def convert(root)
         cleanup_ast(root).map do |child|
           convert_element(child)

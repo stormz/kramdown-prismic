@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
-module Kramdown
+module KramdownPrismic
   module Parser
-    class Prismic < Base
+    Utils = Kramdown::Utils
+    Element = Kramdown::Element
+    
+    class Prismic < Kramdown::Parser::Base
       def parse
         @root.options[:encoding] = 'UTF-8'
         @root.children = @source.reduce([]) do |memo, block|
