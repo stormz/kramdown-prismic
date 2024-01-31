@@ -20,6 +20,8 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
 
   s.add_dependency 'kramdown', '>= 1', '< 3'
+
   s.add_development_dependency 'minitest', '~> 5.0'
   s.add_development_dependency 'rake', '~> 13.0'
+  s.add_development_dependency 'minitest-match_json', '~> 0.2.0'
 end

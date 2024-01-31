@@ -2,5 +2,28 @@
 
 require 'kramdown-prismic'
 require 'json'
+require 'optparse'
 
-print Kramdown::Document.new(ARGV[0], input: :markdown).to_prismic.to_json.to_s
+begin
+  options = {}
+  OptionParser.new do |opts|
+    opts.banner = "Usage: markdown2prismic [options]"
+
+    opts.on("-fFORMAT", "--format=FORMAT", "Prismic format to use") do |format|
+      options[:format] = format&.strip&.downcase&.to_sym
+    end
+  end.parse!
+
+  document = Kramdown::Document.new(ARGV[0], input: :markdown)
+
+  result = case options.fetch(:format, :v1)
+    when :v1
+      document.to_prismic
+    when :v2
+      document.to_prismic_v2
+    else
+      print "Unknown Prismic fomat variant"
+  end
+
+  print result.to_json.to_s
+end

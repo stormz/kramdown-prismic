@@ -6,15 +6,16 @@ module KramdownPrismic
   module Converter
     Utils = Kramdown::Utils
     Element = Kramdown::Element
-
-    class Prismic < Kramdown::Converter::Base
+    
+    # Converter for the Prismic API V1 format (aka Import API format)
+    class ImportApi < Kramdown::Converter::Base
       def convert(root)
         cleanup_ast(root).map do |child|
           convert_element(child)
         end.compact.flatten
       end
 
-      private
+      protected
 
       def cleanup_ast(root)
         remove_blanks(root)
@@ -59,7 +60,28 @@ module KramdownPrismic
       end
 
       def convert_element(element)
-        send("convert_#{element.type}", element)
+        result = send("convert_#{element.type}", element)
+
+        case result
+          when nil then nil
+          when Array
+            result.map(&method(:with_sorted_spans))
+          else
+            with_sorted_spans(result)
+        end
+      end
+
+      # Sort spans to match default Prismic ordering - it is not
+      # an API requirement, but makes testing easier if you have
+      # a matching ordering
+      def with_sorted_spans(element)
+        if (spans = element.dig(:content, :spans))
+          element[:content][:spans] = spans.sort do |lhs, rhs|
+            [lhs[:type], lhs[:start]] <=> [rhs[:type], rhs[:start]]
+          end
+        end
+
+        element
       end
 
       def convert_header(element)
@@ -136,6 +158,7 @@ module KramdownPrismic
       end
 
       # This can only apply when an link with an image inside has been detected
+      # TODO: This is not quite true, it's also callded with (at least) a top-level `<a>` as well
       def convert_a(element)
         image = element.children.first
         {
@@ -176,11 +199,11 @@ module KramdownPrismic
       def convert_html_element(element)
         if element.value == 'iframe'
           {
-            content: {
-              spans: [],
-              text: ''
-            },
             type: 'embed',
+            content: {
+              text: '',
+              spans: []
+            },
             data: {
               embed_url: element.attr['src'],
               type: 'link'
@@ -238,10 +261,21 @@ module KramdownPrismic
         end
       end
 
-      def insert_span(element, memo, span)
+      def insert_span(element, memo, span_attributes)
+        # Attributes are inserted in order of:
+        #   type, start, end, other attributes
+        # again, for slighly simpler comparisions
+        # against typical Prismic ordering in tests
+        span = {
+          type: span_attributes.delete(:type),
+        }
+
         span[:start] = memo[:text].size
         extract_content(element, memo)
         span[:end] = memo[:text].size
+
+        span.merge!(span_attributes)
+
         memo[:spans] << span
         memo
       end
