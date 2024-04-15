@@ -217,9 +217,7 @@ class KramdownPrismicMigrationApiParserTest < Minitest::Test
     prismic = [
       {
         type: 'image',
-        origin: {
-          url: '/img.png'
-        },
+        url: '/img.png',
         alt: 'alt text'
       }
     ]
@@ -233,9 +231,7 @@ class KramdownPrismicMigrationApiParserTest < Minitest::Test
     prismic = [
       {
         type: 'image',
-        origin: {
-          url: '/img.png'
-        },
+        url: '/img.png',
         alt: 'alt text',
         linkTo: {
           url: 'https://example.net/'

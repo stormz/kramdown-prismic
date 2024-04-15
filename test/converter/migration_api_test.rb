@@ -351,9 +351,7 @@ class KramdownPrismicMigrationApiConverterTest < Minitest::Test
     expected = [
       {
         type: 'image',
-        origin: {
-          url: '/img.png'
-        },
+        url: '/img.png',
         alt: 'alt text'
       }
     ]
@@ -367,16 +365,12 @@ class KramdownPrismicMigrationApiConverterTest < Minitest::Test
     expected = [
       {
         type: 'image',
-        origin: {
-          url: '/img.png'
-        },
+        url: '/img.png',
         alt: ''
       },
       {
         type: 'image',
-        origin: {
-          url: '/img2.png'
-        },
+        url: '/img2.png',
         alt: ''
       }
     ]
@@ -391,9 +385,7 @@ class KramdownPrismicMigrationApiConverterTest < Minitest::Test
     expected = [
       {
         type: 'image',
-        origin: {
-          url: '/img.png'
-        },
+        url: '/img.png',
         alt: 'alt text',
         linkTo: {
           url: 'https://example.net/'

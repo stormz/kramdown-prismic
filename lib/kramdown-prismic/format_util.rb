@@ -49,11 +49,11 @@ module KramdownPrismic
           # Attributes describing the image are no longer nested under `data`
           data = element.delete(:data)&.dup
 
-          # The `id` attribute needs to be inlined into the top-level object
-          if data.dig(:origin, :id)
-            data[:origin] = data[:origin].dup
-            data[:id] = data[:origin].delete(:id)
-          end
+          # The `id` and `url`` attributes need to be inlined into the top-level object
+          origin = data.delete(:origin)
+
+          data[:id] = origin[:id] if origin[:id]
+          data[:url] = origin[:url] if origin[:url]
 
           # Image dimesions need to nested into an object under `dimensions` ke
           height = data.delete(:height)

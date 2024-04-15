@@ -46,7 +46,7 @@ module KramdownPrismic
       def parse_image(block)
         p = Element.new(:p)
         # Note that in V2 format the `data` attribute is inlined
-        img = Element.new(:img, nil, { 'src' => block.dig(:origin, :url), 'alt' => block[:alt] })
+        img = Element.new(:img, nil, { 'src' => block[:url], 'alt' => block[:alt] })
         if block[:linkTo]
           a = Element.new(:a, nil, { 'href' => block.dig(:linkTo, :url) })
           a.children << img
