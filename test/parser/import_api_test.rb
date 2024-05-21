@@ -3,7 +3,7 @@
 require 'minitest/autorun'
 require 'kramdown-prismic'
 
-class KramdownPrismicParserTest < Minitest::Test
+class KramdownPrismicImportApiParserTest < Minitest::Test
   6.times do |heading|
     define_method "test_parse_heading_#{heading}" do
       prismic = [

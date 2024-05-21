@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
-module Kramdown
+require 'kramdown/parser/base'
+
+module KramdownPrismic
   module Parser
-    class Prismic < Base
+    Utils = Kramdown::Utils
+    Element = Kramdown::Element
+    
+    # Converter for the Prismic API V2 format (aka Migration API format)
+    class MigrationApi < Kramdown::Parser::Base
       def parse
         @root.options[:encoding] = 'UTF-8'
         @root.children = @source.reduce([]) do |memo, block|
@@ -10,7 +16,7 @@ module Kramdown
         end
       end
 
-      private
+      protected
 
       def parse_element(block, memo)
         type = block[:type].gsub('-', '_')
@@ -39,9 +45,10 @@ module Kramdown
 
       def parse_image(block)
         p = Element.new(:p)
-        img = Element.new(:img, nil, { 'src' => block[:data][:origin][:url], 'alt' => block[:data][:alt] })
-        if block[:data][:linkTo]
-          a = Element.new(:a, nil, { 'href' => block[:data][:linkTo][:url] })
+        # Note that in V2 format the `data` attribute is inlined
+        img = Element.new(:img, nil, { 'src' => block[:url], 'alt' => block[:alt] })
+        if block[:linkTo]
+          a = Element.new(:a, nil, { 'href' => block.dig(:linkTo, :url) })
           a.children << img
           p.children << a
         else
@@ -68,13 +75,17 @@ module Kramdown
       end
 
       def parse_embed(block)
-        Element.new(:html_element, 'iframe', { src: block[:data][:embed_url] })
+        # Note how in V2 format `data` attribute is now `oembed`
+        Element.new(:html_element, 'iframe', { src: block[:oembed][:embed_url] })
       end
 
       def parse_spans(element, block)
         stack = []
 
-        (block[:content][:text].size + 1).times do |index|
+        # In V2 some entities (such as images or embeds) don't get content attributes
+        return unless block.has_key?(:text)
+
+        (block[:text].size + 1).times do |index|
           starting_spans = find_starting_spans_for(block, index)
           ending_spans   = find_ending_spans_for(block, index)
 
@@ -94,7 +105,7 @@ module Kramdown
                      end
           end
 
-          char = block[:content][:text][index]
+          char = block[:text][index]
           next if char.nil?
 
           current_text = if stack.empty?
@@ -115,7 +126,8 @@ module Kramdown
       end
 
       def find_starting_spans_for(block, index)
-        block[:content][:spans].find_all do |span|
+        # Note how in V2 `content` attributes are inlined
+        block[:spans].find_all do |span|
           span[:start] == index
         end.sort_by do |span|
           -span[:end]
@@ -123,7 +135,8 @@ module Kramdown
       end
 
       def find_ending_spans_for(block, index)
-        block[:content][:spans].find_all do |span|
+        # Note how in V2 `content` attributes are inlined
+        block[:spans].find_all do |span|
           span[:end] == index
         end
       end
