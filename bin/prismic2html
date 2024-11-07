@@ -27,5 +27,5 @@ begin
 
   document = Kramdown::Document.new(source, input: format)
 
-  print document.to_kramdown
+  print document.to_html
 end

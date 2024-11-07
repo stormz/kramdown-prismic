@@ -3,7 +3,7 @@
 require 'minitest/autorun'
 require 'kramdown-prismic'
 
-class KramdownPrismicConverterTest < Minitest::Test
+class KramdownPrismicImportApiConverterTest < Minitest::Test
   6.times do |heading|
     define_method "test_convert_heading_#{heading}" do
       expected = [
